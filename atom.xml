@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>Somersames</title>
   
   
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-05T14:52:23.776Z</updated>
+  <updated>2017-11-06T05:00:07.932Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,12 +21,16 @@
     <link href="http://yoursite.com/2017/11/05/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/"/>
     <id>http://yoursite.com/2017/11/05/测试博客/</id>
     <published>2017-11-05T14:52:23.000Z</published>
-    <updated>2017-11-05T14:52:23.776Z</updated>
+    <updated>2017-11-06T05:00:07.932Z</updated>
     
     <summary type="html">
     
     </summary>
     
+      <category term="测试使用" scheme="http://yoursite.com/categories/%E6%B5%8B%E8%AF%95%E4%BD%BF%E7%94%A8/"/>
+    
+    
+      <category term="无聊测试" scheme="http://yoursite.com/tags/%E6%97%A0%E8%81%8A%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
