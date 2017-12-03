@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Somersames" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="pandas读取csv文件在pandas读里面包含了几个函数分别用来读取csv或者excel文件：read_csv方法用来读取一个csv文件一般常用参数是path:用于指定一个文件及其目录sep表示读取该csv文件的时候是以什么制表符读取的，一般是’,’usecols表示需要读取csv的多少列，这是一个绝对索引，0代表的是第一列，参数为一个list Pandas的结构：pandas经常使用的结构一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandas的操作使用">
+<meta property="og:url" content="http://yoursite.com/2017/12/03/pandas的操作使用/index.html">
+<meta property="og:site_name" content="Somersames">
+<meta property="og:description" content="pandas读取csv文件在pandas读里面包含了几个函数分别用来读取csv或者excel文件：read_csv方法用来读取一个csv文件一般常用参数是path:用于指定一个文件及其目录sep表示读取该csv文件的时候是以什么制表符读取的，一般是’,’usecols表示需要读取csv的多少列，这是一个绝对索引，0代表的是第一列，参数为一个list Pandas的结构：pandas经常使用的结构一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-03T11:19:16.150Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pandas的操作使用">
+<meta name="twitter:description" content="pandas读取csv文件在pandas读里面包含了几个函数分别用来读取csv或者excel文件：read_csv方法用来读取一个csv文件一般常用参数是path:用于指定一个文件及其目录sep表示读取该csv文件的时候是以什么制表符读取的，一般是’,’usecols表示需要读取csv的多少列，这是一个绝对索引，0代表的是第一列，参数为一个list Pandas的结构：pandas经常使用的结构一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/03/pandas的操作使用/"/>
+
+
+
+
+
+  <title>pandas的操作使用 | Somersames</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Somersames</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/03/pandas的操作使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Somersames">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Somersames">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pandas的操作使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-03T18:06:32+08:00">
+                2017-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="pandas读取csv文件"><a href="#pandas读取csv文件" class="headerlink" title="pandas读取csv文件"></a>pandas读取csv文件</h1><p>在pandas读里面包含了几个函数分别用来读取csv或者excel文件：<br><code>read_csv</code>方法用来读取一个csv文件一般常用参数是<code>path</code>:用于指定一个文件及其目录<br><code>sep</code>表示读取该csv文件的时候是以什么制表符读取的，一般是’,’<br><code>usecols</code>表示需要读取csv的多少列，这是一个绝对索引，0代表的是第一列，参数为一个list</p>
+<h1 id="Pandas的结构："><a href="#Pandas的结构：" class="headerlink" title="Pandas的结构："></a>Pandas的结构：</h1><p>pandas经常使用的结构一般是dataframe和series,DataFrame类似于二维数组，或者sql里面的一张表，若在创建的时候为指定索引的话则默认从0开始一次递增为索引：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line">In [<span class="number">15</span>]: df_2=pd.DataFrame(data=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>])</div><div class="line"></div><div class="line">In [<span class="number">16</span>]: df_2</div><div class="line">Out[<span class="number">16</span>]: </div><div class="line">   <span class="number">0</span></div><div class="line"><span class="number">0</span>  a</div><div class="line"><span class="number">1</span>  b</div><div class="line"><span class="number">2</span>  c</div><div class="line">用上述方式创建的时候是不需要指定index的，但是用标量创建的时候是需要指定index的：</div><div class="line">pd.DataFrame(&#123;<span class="string">'a'</span>:<span class="string">'A'</span>,<span class="string">'b'</span>:<span class="string">'B'</span>&#125;)</div><div class="line">ValueError: If using all scalar values, you must <span class="keyword">pass</span> an index</div></pre></td></tr></table></figure></p>
+<h1 id="基本实例："><a href="#基本实例：" class="headerlink" title="基本实例："></a>基本实例：</h1><p>读取北京2017年07月01日的空气质量情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> df_20170101 =pd.read_csv(path,sep=&apos;,&apos;,decimal=&apos;,&apos;,usecols=[0,1,2,3,4,5,6,7,8,9]) #path是我的文件地址</div><div class="line">       date  hour       type  dongfour   天坛   官园  万寿西宫  奥体中心  农展馆   万柳</div><div class="line">0  20170101    22      PM2.5       469  357  476   416   453  398  468</div><div class="line">1  20170101    22  PM2.5_24h       NaN  NaN  NaN   NaN   NaN  NaN  NaN</div><div class="line">2  20170101    22       PM10       594  449  548   474   467  469  518</div><div class="line">3  20170101    22   PM10_24h       NaN  NaN  NaN   NaN   NaN  NaN  NaN</div><div class="line">4  20170101    22        AQI       494  405  484   444   469  432  479</div><div class="line">5  20170101    23      PM2.5       470  351  500   403   417  392  459</div><div class="line">6  20170101    23  PM2.5_24h       NaN  NaN  NaN   NaN   NaN  NaN  NaN</div><div class="line">7  20170101    23       PM10       558  467  583   469   443  480  529</div><div class="line">8  20170101    23   PM10_24h       NaN  NaN  NaN   NaN   NaN  NaN  NaN</div><div class="line">9  20170101    23        AQI       480  401  500   435   445  428  473</div></pre></td></tr></table></figure></p>
+<p>假设需要获取天坛的22点到23点情况，那么只需要使用df_20170101[‘天坛’]：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">0    357</div><div class="line">1    NaN</div><div class="line">2    449</div><div class="line">3    NaN</div><div class="line">4    405</div><div class="line">5    351</div><div class="line">6    NaN</div><div class="line">7    467</div><div class="line">8    NaN</div><div class="line">9    401</div></pre></td></tr></table></figure></p>
+<p>这就是pandas的另一种结构：series，类似于一个竖着地数组，那么假设现在需要获取天坛的22点的pm2.5<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">一种方式是知道索引:</div><div class="line">In [6]: df_20170101.loc[0][&apos;天坛&apos;]</div><div class="line">Out[6]: 357.0</div><div class="line">一种则是获取22点并且type为PM2.5的时候的天坛</div><div class="line">In [7]: df_20170101.loc[(df_20170101[&apos;hour&apos;]==22) &amp; (df_20170101[&apos;type&apos;]==&apos;PM2.5&apos;),&apos;天坛&apos;]</div><div class="line">Out[7]: </div><div class="line">0    357</div><div class="line">Name: 天坛, dtype: float64</div></pre></td></tr></table></figure></p>
+<p>那么这个数据中有很多的NaN值，其中PM2.5_24h的值发现都为NaN，则这个值其实是可以被剔除的，那么常用的做法就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">In [8]: df_20170101.loc[~df_20170101[&apos;dongfour&apos;].isnull()]</div><div class="line">Out[8]: </div><div class="line">       date  hour   type  dongfour   天坛   官园  万寿西宫  奥体中心  农展馆   万柳</div><div class="line">0  20170101    22  PM2.5       469  357  476   416   453  398  468</div><div class="line">2  20170101    22   PM10       594  449  548   474   467  469  518</div><div class="line">4  20170101    22    AQI       494  405  484   444   469  432  479</div><div class="line">5  20170101    23  PM2.5       470  351  500   403   417  392  459</div><div class="line">7  20170101    23   PM10       558  467  583   469   443  480  529</div><div class="line">9  20170101    23    AQI       480  401  500   435   445  428  473</div><div class="line"></div><div class="line">至于为什么选择dongfour是因为选择其他的也是一样的，都可以，但是如果需要将NaN的值替换成0的话只需要执行</div><div class="line">In [9]: df_20170101.fillna(0)</div><div class="line">Out[9]: </div><div class="line">       date  hour       type  dongfour   天坛   官园  万寿西宫  奥体中心  农展馆   万柳</div><div class="line">0  20170101    22      PM2.5       469  357  476   416   453  398  468</div><div class="line">1  20170101    22  PM2.5_24h         0    0    0     0     0    0    0</div><div class="line">2  20170101    22       PM10       594  449  548   474   467  469  518</div><div class="line">3  20170101    22   PM10_24h         0    0    0     0     0    0    0</div><div class="line">4  20170101    22        AQI       494  405  484   444   469  432  479</div><div class="line">5  20170101    23      PM2.5       470  351  500   403   417  392  459</div><div class="line">6  20170101    23  PM2.5_24h         0    0    0     0     0    0    0</div><div class="line">7  20170101    23       PM10       558  467  583   469   443  480  529</div><div class="line">8  20170101    23   PM10_24h         0    0    0     0     0    0    0</div><div class="line">9  20170101    23        AQI       480  401  500   435   445  428  473</div><div class="line">就会将NaN值全部转为0</div></pre></td></tr></table></figure></p>
+<h1 id="Group实例："><a href="#Group实例：" class="headerlink" title="Group实例："></a>Group实例：</h1><p>若现在需要统计dongfour的22到23点的PM2.5平均值，那么需要对type进行groupby:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">In [29]: df_20170101[&apos;dongfourmean&apos;]=df_20170101.groupby(&apos;type&apos;)[&apos;dongfour&apos;].apply(lambda x : pd.Series(np.mean(x),index=x.index))</div><div class="line"></div><div class="line">In [30]: df_20170101</div><div class="line">Out[30]: </div><div class="line">       date  hour   type  dongfour   天坛   官园  奥体中心  农展馆   万柳  dongfourmean</div><div class="line">0  20170101    22  PM2.5       469  357  476   453  398  468         469.5</div><div class="line">2  20170101    22   PM10       594  449  548   467  469  518         576.0</div><div class="line">4  20170101    22    AQI       494  405  484   469  432  479         487.0</div><div class="line">5  20170101    23  PM2.5       470  351  500   417  392  459         469.5</div><div class="line">7  20170101    23   PM10       558  467  583   443  480  529         576.0</div><div class="line">9  20170101    23    AQI       480  401  500   445  428  473         487.0</div><div class="line">因为df_20170101[&apos;dongfourmean&apos;]是一个Series所以返回的时候也是需要Series</div></pre></td></tr></table></figure></p>
+<p>若现在需要求的是dongfour到万柳的22点的PM2.5平均值则是可以先对df_20170101进行一个转置操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">In [35]: df_T</div><div class="line">Out[35]: </div><div class="line">                     0         2         4         5         7         9</div><div class="line">date          20170101  20170101  20170101  20170101  20170101  20170101</div><div class="line">hour                22        22        22        23        23        23</div><div class="line">type             PM2.5      PM10       AQI     PM2.5      PM10       AQI</div><div class="line">dongfour           469       594       494       470       558       480</div><div class="line">天坛                 357       449       405       351       467       401</div><div class="line">官园                 476       548       484       500       583       500</div><div class="line">奥体中心               453       467       469       417       443       445</div><div class="line">农展馆                398       469       432       392       480       428</div><div class="line">万柳                 468       518       479       459       529       473</div><div class="line">dongfourmean     469.5       576       487     469.5       576       487</div><div class="line"></div><div class="line">In [38]: np.mean(df_T.ix[3:8][0])</div><div class="line">Out[38]: 430.60000000000002</div></pre></td></tr></table></figure></p>
+<h1 id="注意细节："><a href="#注意细节：" class="headerlink" title="注意细节："></a>注意细节：</h1><p>pandas进行group之后是不可以在用loc进行操作的，即在pandas里面<code>GroupBy objects</code>进行一些操作的话可以采用apply，而不能使用loc<br>若非要使用loc则在使用groups之后转化成一个dataframe之后再进行一些dataframe的操作</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/10/关于流和多态的一些记录/" rel="next" title="关于流和多态的一些记录">
+                <i class="fa fa-chevron-left"></i> 关于流和多态的一些记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Somersames</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pandas读取csv文件"><span class="nav-number">1.</span> <span class="nav-text">pandas读取csv文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas的结构："><span class="nav-number">2.</span> <span class="nav-text">Pandas的结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本实例："><span class="nav-number">3.</span> <span class="nav-text">基本实例：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Group实例："><span class="nav-number">4.</span> <span class="nav-text">Group实例：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意细节："><span class="nav-number">5.</span> <span class="nav-text">注意细节：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Somersames</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
