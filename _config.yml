@@ -6,6 +6,7 @@
 title: Somersames
 subtitle:
 description:
+keywords:
 author: Somersames
 language: zh-CN
 timezone:
@@ -34,7 +35,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: true
+post_asset_folder: false
 relative_link: false
 future: true
 highlight:
@@ -72,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: pure
+theme: hexo-theme-next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -80,3 +81,11 @@ deploy:
   type: git
   repo: git@github.com:Somersames/somersames.github.io.git   
   branch: master
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+
