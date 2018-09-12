@@ -121,7 +121,7 @@ final Node<K,V> nextNode() {
 注意这一段代码
 >  if (t != null && size > 0) { // advance to first entry
                 do {} while (index < t.length && (next = t[index++]) == null);
-            }
+    }
 
 
 这一段代码的作用是找出`table[]`中第一个不为null的桶，所以其实HashMap的迭代就是依据桶中的顺序来的，但是LinkedHashMap则是按找链表的顺序来的。
