@@ -1,7 +1,7 @@
 ---
 title: Python2.7使用Pandas连接数据库
 date: 2018-04-11 23:06:57
-tags: [pandas,mysql]
+tags: [pandas,Mysql]
 categories: Python
 ---
 今天遇到一个需求，需要将Excel中的一些数据导入到mysql中，由于之前接触到了Python的Pandas，所以这个时候便想到了Python，但是连接数据库的时候出现了问题，所以便写一个文章记录下。
