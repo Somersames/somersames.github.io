@@ -120,7 +120,7 @@ ConnectionFactory factory = new ConnectionFactory();
         };
         channel.basicConsume(dQueueName,defaultConsumer);
 ```
-
+下图中可以看到，消费者总是在2秒钟之后收到了发送方发送的消息，这时一个延时队列就实现了
 
 ![](https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/GIF2.gif)
 
