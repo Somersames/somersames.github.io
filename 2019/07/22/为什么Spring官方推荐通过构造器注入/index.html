@@ -94,21 +94,18 @@
 
 
 
-  <meta name="description" content="在开始了解Json的原理之前，首先看一段代码，在这里以阿里的FastJson为例。12345678public class JsonRun &amp;#123;    public static void main(String[] args) &amp;#123;        JSONObject jsonObject =new JSONObject();        jsonObject.put(&quot;id&quot;">
-<meta name="keywords" content="Json">
+  <meta name="description" content="一我们在使用Spring的时候，最方便的就是它的IOC（控制反转），也就是所有的Bean都交由 Spring进行管理，那么我们在看网上的文章或者自己在写代码的时候经常会像这样写： 123456789101112131415161718192021222324@Servicepublic class TestService &amp;#123;   @Autowired   TestDao TestDao;">
+<meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Json的底层实现一览">
-<meta property="og:url" content="https://somersames.github.io/2018/09/06/Json的底层实现一览/index.html">
+<meta property="og:title" content="为什么Spring官方推荐通过构造器注入">
+<meta property="og:url" content="https://somersames.github.io/2019/07/22/为什么Spring官方推荐通过构造器注入/index.html">
 <meta property="og:site_name" content="Somersames">
-<meta property="og:description" content="在开始了解Json的原理之前，首先看一段代码，在这里以阿里的FastJson为例。12345678public class JsonRun &amp;#123;    public static void main(String[] args) &amp;#123;        JSONObject jsonObject =new JSONObject();        jsonObject.put(&quot;id&quot;">
+<meta property="og:description" content="一我们在使用Spring的时候，最方便的就是它的IOC（控制反转），也就是所有的Bean都交由 Spring进行管理，那么我们在看网上的文章或者自己在写代码的时候经常会像这样写： 123456789101112131415161718192021222324@Servicepublic class TestService &amp;#123;   @Autowired   TestDao TestDao;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/TIM%E6%88%AA%E5%9B%BE20180909203451.png">
-<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%90%8E.png">
-<meta property="og:updated_time" content="2019-06-08T15:06:14.252Z">
+<meta property="og:updated_time" content="2019-07-21T16:21:56.585Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Json的底层实现一览">
-<meta name="twitter:description" content="在开始了解Json的原理之前，首先看一段代码，在这里以阿里的FastJson为例。12345678public class JsonRun &amp;#123;    public static void main(String[] args) &amp;#123;        JSONObject jsonObject =new JSONObject();        jsonObject.put(&quot;id&quot;">
-<meta name="twitter:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/TIM%E6%88%AA%E5%9B%BE20180909203451.png">
+<meta name="twitter:title" content="为什么Spring官方推荐通过构造器注入">
+<meta name="twitter:description" content="一我们在使用Spring的时候，最方便的就是它的IOC（控制反转），也就是所有的Bean都交由 Spring进行管理，那么我们在看网上的文章或者自己在写代码的时候经常会像这样写： 123456789101112131415161718192021222324@Servicepublic class TestService &amp;#123;   @Autowired   TestDao TestDao;">
 
 
 
@@ -118,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://somersames.github.io/2018/09/06/Json的底层实现一览/"/>
+  <link rel="canonical" href="https://somersames.github.io/2019/07/22/为什么Spring官方推荐通过构造器注入/"/>
 
 
 
@@ -128,7 +125,7 @@
   };
 </script>
 
-  <title>Json的底层实现一览 | Somersames</title>
+  <title>为什么Spring官方推荐通过构造器注入 | Somersames</title>
   
 
 
@@ -354,7 +351,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2018/09/06/Json的底层实现一览/"/>
+    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2019/07/22/为什么Spring官方推荐通过构造器注入/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Somersames"/>
@@ -371,7 +368,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Json的底层实现一览
+          <h1 class="post-title" itemprop="name headline">为什么Spring官方推荐通过构造器注入
 
               
             
@@ -397,23 +394,13 @@
                 
               
 
-              <time title="创建时间：2018-09-06 23:44:26" itemprop="dateCreated datePublished" datetime="2018-09-06T23:44:26+08:00">2018-09-06</time>
+              <time title="创建时间：2019-07-22 00:16:15 / 修改时间：00:21:56" itemprop="dateCreated datePublished" datetime="2019-07-22T00:16:15+08:00">2019-07-22</time>
             </span>
           
 
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-08 23:06:14" itemprop="dateModified" datetime="2019-06-08T23:06:14+08:00">2019-06-08</time>
-              </span>
             
           
 
@@ -426,7 +413,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Json/" itemprop="url" rel="index"><span itemprop="name">Json</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
@@ -464,27 +451,24 @@
       
 
       
-        <p>在开始了解Json的原理之前，首先看一段代码，在这里以阿里的<code>FastJson</code>为例。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsonRun</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        JSONObject jsonObject =<span class="keyword">new</span> JSONObject();</span><br><span class="line">        jsonObject.put(<span class="string">"id"</span>,<span class="string">"a"</span>);</span><br><span class="line">        jsonObject.put(<span class="string">"name"</span>,<span class="string">"b"</span>);</span><br><span class="line">        System.out.println(jsonObject.toJSONString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>当看到上述代码的时候，可能一般的程序员都会想到的是输出为如下<code>Json</code>串</p>
+        <h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>我们在使用Spring的时候，最方便的就是它的IOC（控制反转），也就是所有的Bean都交由</p>
+<p>Spring进行管理，那么我们在看网上的文章或者自己在写代码的时候经常会像这样写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Autowired</span></span><br><span class="line">   TestDao TestDao;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">final</span> TestDao TestDao;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Autowired</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">TestService</span><span class="params">(TestDao TestDao)</span></span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.TestDao = TestDao;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是貌似许多人都会使用第一种方式，因为这样简单方便，如果是采用第二种的话，每一次新增加一个bean，都需要在构造器的入参上面加一个参数，就会显得有点麻烦。</p>
+<p>但是如果采用第一个写法，就会在IDEA里面出现一个提示：</p>
 <blockquote>
-<p>{“id”:”a”,”name”:”b”}<br>但是运行这段程序，你会发现控制台打印出来的是如下代码：<br>{“name”:”b”,”id”:”a”}</p>
+<p> spring官方建议通过构造器的方式进行注入</p>
 </blockquote>
-<p>那么为什么会出现这种情况呢，翻开<code>FastJson</code>的源码便知道了，首先定位到 JsonObject 这个类的构造函数，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">JSONObject</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">boolean</span> ordered)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ordered) &#123;</span><br><span class="line">            map = <span class="keyword">new</span> LinkedHashMap&lt;String, Object&gt;(initialCapacity);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(initialCapacity);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>这里的 <code>ordered</code> 为一个构造参数，表示的是是否按照顺序添加，此处先不管，然后可以发现在阿里的FastJson中，其实默认的Json实现是一个Map，那么对于LinkedHashMap来讲，它是一个map和双向链表的整合体，所以在LinkedList中，每一个Node都会有一个前指针和一个后指针</p>
-<h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h1><p>LinkedHashMap 是一个HashMap的变种，大家都知道，一个HashMap是由一个桶和一个桶后面的节点组成的，而桶其实是一个数组，每一个桶的索引所对应的值都是由<code>Hash()</code>函数计算得出的。那么这样就会导致桶的元素是一个乱序的存储的，例如在本段代码中的<code>id</code>和<code>name</code>，它们所在的桶索引可能是:<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/TIM%E6%88%AA%E5%9B%BE20180909203451.png" alt=""></p>
-<p>这样就导致了一个问题，就是Json的键的顺序是无法保证的，那么既然HashMap是无法保证的，为什么LinkedHashMap却可以保证顺序。</p>
-<h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><p>翻开LinkedHashMap的源码可以发现，在其节点类里面，LinkedHashMap在 HashMap的Entry基础上又添加了一个<code>before</code>和<code>after</code>指针，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">HashMap</span>.<span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">      Entry&lt;K,V&gt; before, after;</span><br><span class="line">      Entry(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">          <span class="keyword">super</span>(hash, key, value, next);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
-<p>那么这两个指针就是双向链表的指针。有了这两个指针之后，每一个新插入的节点都会知道他的前驱结点和后置节点，那么对于LinkedHashMap的插入顺序就会有保证了。所以其对应的数据结构如图：<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%90%8E.png" alt=""></p>
-<p>在这个结构里面，桶索引是<code>id</code>的第一个节点是一个头节点，在新插入<code>name</code>的时候，LinkedHashMap会将head节点的<code>after</code>指针指向name，所以虽然这是一个HashMap，但是它的顺序还是可以保证的。</p>
-<h2 id="LinkedHashMap的迭代"><a href="#LinkedHashMap的迭代" class="headerlink" title="LinkedHashMap的迭代"></a>LinkedHashMap的迭代</h2><p>区别于HashMap以索引的方式进行迭代，<code>LinkedHashMap</code>是以链表的指针进行迭代的，如以下代码所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedHashIterator</span> </span>&#123;</span><br><span class="line">        LinkedHashMap.Entry&lt;K,V&gt; next;</span><br><span class="line">        LinkedHashMap.Entry&lt;K,V&gt; current;</span><br><span class="line">        <span class="keyword">int</span> expectedModCount;</span><br><span class="line"></span><br><span class="line">        LinkedHashIterator() &#123;</span><br><span class="line">            next = head;</span><br><span class="line">            expectedModCount = modCount;</span><br><span class="line">            current = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> LinkedHashMap.<span class="function">Entry&lt;K,V&gt; <span class="title">nextNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            LinkedHashMap.Entry&lt;K,V&gt; e = next;  <span class="comment">//next就是head节点</span></span><br><span class="line">            <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">            <span class="keyword">if</span> (e == <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">            current = e;</span><br><span class="line">            next = e.after; <span class="comment">//此处每一次的迭代都是链表的after</span></span><br><span class="line">            <span class="keyword">return</span> e;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
-<p>可以看到在每一次迭代的时候LinkedHashMap都是以链表的next节点作为下一个迭代，那么HashMap呢？</p>
-<h2 id="HashMap的迭代"><a href="#HashMap的迭代" class="headerlink" title="HashMap的迭代"></a>HashMap的迭代</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">HashIterator</span> </span>&#123;</span><br><span class="line">        Node&lt;K,V&gt; next;        <span class="comment">// next entry to return</span></span><br><span class="line">        Node&lt;K,V&gt; current;     <span class="comment">// current entry</span></span><br><span class="line">        <span class="keyword">int</span> expectedModCount;  <span class="comment">// for fast-fail</span></span><br><span class="line">        <span class="keyword">int</span> index;             <span class="comment">// current slot</span></span><br><span class="line"></span><br><span class="line">HashIterator() &#123;</span><br><span class="line">            expectedModCount = modCount;</span><br><span class="line">            Node&lt;K,V&gt;[] t = table;</span><br><span class="line">            current = next = <span class="keyword">null</span>;</span><br><span class="line">            index = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (t != <span class="keyword">null</span> &amp;&amp; size &gt; <span class="number">0</span>) &#123; <span class="comment">// advance to first entry</span></span><br><span class="line">                <span class="keyword">do</span> &#123;&#125; <span class="keyword">while</span> (index &lt; t.length &amp;&amp; (next = t[index++]) == <span class="keyword">null</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">final</span> Node&lt;K,V&gt; <span class="title">nextNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Node&lt;K,V&gt;[] t;</span><br><span class="line">            Node&lt;K,V&gt; e = next;</span><br><span class="line">            <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">            <span class="keyword">if</span> (e == <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">            <span class="keyword">if</span> ((next = (current = e).next) == <span class="keyword">null</span> &amp;&amp; (t = table) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">do</span> &#123;&#125; <span class="keyword">while</span> (index &lt; t.length &amp;&amp; (next = t[index++]) == <span class="keyword">null</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> e;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>注意这一段代码</p>
-<blockquote>
-<p> if (t != null &amp;&amp; size &gt; 0) { // advance to first entry<br>                do {} while (index &lt; t.length &amp;&amp; (next = t[index++]) == null);<br>    }</p>
-</blockquote>
-<p>这一段代码的作用是找出<code>table[]</code>中第一个不为null的桶，所以其实HashMap的迭代就是依据桶中的顺序来的，但是LinkedHashMap则是按找链表的顺序来的。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>其实每一个java的设计都是很精妙的…</p>
+<p>这又是为什么呢？</p>
+<p><a href="https://spring.io/blog/2007/07/11/setter-injection-versus-constructor-injection-and-the-use-of-required/" target="_blank" rel="noopener">Spring官方对于Setter注入和构造器注入的看法</a></p>
+<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>在springboot里面，最常用的注入方式有两种：一种是构造器注入，一种是field注入</p>
+<p>在上一部分的代码里面，第一个是 Field 注入，第二个是构造器注入，既然这两种方式Spring都支持，那么到底这两种有什么区别呢？</p>
+<h3 id="Field注入"><a href="#Field注入" class="headerlink" title="Field注入"></a>Field注入</h3><p>这边新建两个测试类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayA</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"A"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    A a;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">B</span><span class="params">()</span></span>&#123;</span><br><span class="line">        a.sayA();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时你启动Spring的话，就会出现一个空指针的异常，如果需要避免的话，则必须是类 <code>A</code> 先进行初始化，然后再初始化 <code>B</code> 。（当然Spring官方也提供了很多方式来控制 Bean 的初始化顺序，但是和本篇文章无关）</p>
+<h3 id="构造器注入"><a href="#构造器注入" class="headerlink" title="构造器注入"></a>构造器注入</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> A a;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">B</span><span class="params">(A a)</span></span>&#123;</span><br><span class="line">        a.sayA();</span><br><span class="line">        <span class="keyword">this</span>.a = a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时Spring的项目就会正常的启动，那么为什么同样的代码，一个通过构造器注入，一个通过Field注入，两者的结果相差这么大呢？</p>
+<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>官方之所以现在推荐使用构造器注入，是因为通过构造器注入是可以防止 <code>空指针异常</code>，同时可以确保的是被引用的 <code>Bean</code> ，它的引用是不可以变的，所以这可能是Spring官方团队的一些权衡点吧<br>当然早期的时候，Spring曾推荐过使用Setter注入，不够现在可能Spring可能觉得构造器注入比较好。</p>
 
       
     </div>
@@ -511,7 +495,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Json/" rel="tag"># Json</a>
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
           
         </div>
       
@@ -524,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/04/将Jackson替换成Fastjosn/" rel="next" title="将Jackson替换成Fastjosn">
-                <i class="fa fa-chevron-left"></i> 将Jackson替换成Fastjosn
+              <a href="/2019/07/07/2019年07月第一周总结/" rel="next" title="2019年07月第一周总结">
+                <i class="fa fa-chevron-left"></i> 2019年07月第一周总结
               </a>
             
           </div>
@@ -533,10 +517,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/10/使用Mybatis遇到的there-is-no-getter-异常/" rel="prev" title="使用Mybatis遇到的there is no getter 异常">
-                使用Mybatis遇到的there is no getter 异常 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -886,7 +866,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap"><span class="nav-number">1.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">1.1.</span> <span class="nav-text">LinkedHashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap的迭代"><span class="nav-number">1.2.</span> <span class="nav-text">LinkedHashMap的迭代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap的迭代"><span class="nav-number">1.3.</span> <span class="nav-text">HashMap的迭代</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一"><span class="nav-number">1.</span> <span class="nav-text">一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二"><span class="nav-number">2.</span> <span class="nav-text">二</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Field注入"><span class="nav-number">2.1.</span> <span class="nav-text">Field注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造器注入"><span class="nav-number">2.2.</span> <span class="nav-text">构造器注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三"><span class="nav-number">3.</span> <span class="nav-text">三</span></a></li></ol></div>
             
 
           </div>
