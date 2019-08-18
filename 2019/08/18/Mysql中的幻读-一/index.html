@@ -94,20 +94,18 @@
 
 
 
-  <meta name="description" content="在Java里面，List转为Array是调用的Java的一个Arrays.copyOf()这个方法，查看了下源代码：1234567891011121314151617181920212223public Object[] toArray() &amp;#123;        return Arrays.copyOf(this.elementData, this.size);    &amp;#125; publ">
-<meta name="keywords" content="java基础">
+  <meta name="description" content="什么是幻读幻读表示的是在一个事物里面 同一个select语句，前后两次查询出来的结果是不相同的，需要注意的一点是，在InnoDB里面，幻读跟事物的隔离级别有关，更加准确的说是跟一个事物的快照和当前读有关 下面是在Mysql8.0.11版本下进行幻读的复现：  引擎：InnoDB 事物隔离级别：Read Commited  MVCC和快照读以及当前读MVCC在介绍MVCC之前先来介绍下MVCC为什么">
+<meta name="keywords" content="Mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对Java的List转Array的源码一点思考">
-<meta property="og:url" content="https://somersames.github.io/2018/04/07/对Java的List转Array的源码一点思考/index.html">
+<meta property="og:title" content="Mysql中的幻读(一)">
+<meta property="og:url" content="https://somersames.github.io/2019/08/18/Mysql中的幻读-一/index.html">
 <meta property="og:site_name" content="Somersames">
-<meta property="og:description" content="在Java里面，List转为Array是调用的Java的一个Arrays.copyOf()这个方法，查看了下源代码：1234567891011121314151617181920212223public Object[] toArray() &amp;#123;        return Arrays.copyOf(this.elementData, this.size);    &amp;#125; publ">
+<meta property="og:description" content="什么是幻读幻读表示的是在一个事物里面 同一个select语句，前后两次查询出来的结果是不相同的，需要注意的一点是，在InnoDB里面，幻读跟事物的隔离级别有关，更加准确的说是跟一个事物的快照和当前读有关 下面是在Mysql8.0.11版本下进行幻读的复现：  引擎：InnoDB 事物隔离级别：Read Commited  MVCC和快照读以及当前读MVCC在介绍MVCC之前先来介绍下MVCC为什么">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://somersames.github.io/2018/04/07/对Java的List转Array的源码一点思考/不可转截图.png">
-<meta property="og:updated_time" content="2019-06-08T15:06:14.274Z">
+<meta property="og:updated_time" content="2019-08-18T13:53:34.790Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="对Java的List转Array的源码一点思考">
-<meta name="twitter:description" content="在Java里面，List转为Array是调用的Java的一个Arrays.copyOf()这个方法，查看了下源代码：1234567891011121314151617181920212223public Object[] toArray() &amp;#123;        return Arrays.copyOf(this.elementData, this.size);    &amp;#125; publ">
-<meta name="twitter:image" content="https://somersames.github.io/2018/04/07/对Java的List转Array的源码一点思考/不可转截图.png">
+<meta name="twitter:title" content="Mysql中的幻读(一)">
+<meta name="twitter:description" content="什么是幻读幻读表示的是在一个事物里面 同一个select语句，前后两次查询出来的结果是不相同的，需要注意的一点是，在InnoDB里面，幻读跟事物的隔离级别有关，更加准确的说是跟一个事物的快照和当前读有关 下面是在Mysql8.0.11版本下进行幻读的复现：  引擎：InnoDB 事物隔离级别：Read Commited  MVCC和快照读以及当前读MVCC在介绍MVCC之前先来介绍下MVCC为什么">
 
 
 
@@ -117,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://somersames.github.io/2018/04/07/对Java的List转Array的源码一点思考/"/>
+  <link rel="canonical" href="https://somersames.github.io/2019/08/18/Mysql中的幻读-一/"/>
 
 
 
@@ -127,7 +125,7 @@
   };
 </script>
 
-  <title>对Java的List转Array的源码一点思考 | Somersames</title>
+  <title>Mysql中的幻读(一) | Somersames</title>
   
 
 
@@ -353,7 +351,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2018/04/07/对Java的List转Array的源码一点思考/"/>
+    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2019/08/18/Mysql中的幻读-一/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Somersames"/>
@@ -370,7 +368,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">对Java的List转Array的源码一点思考
+          <h1 class="post-title" itemprop="name headline">Mysql中的幻读(一)
 
               
             
@@ -396,23 +394,13 @@
                 
               
 
-              <time title="创建时间：2018-04-07 19:42:48" itemprop="dateCreated datePublished" datetime="2018-04-07T19:42:48+08:00">2018-04-07</time>
+              <time title="创建时间：2019-08-18 20:41:54 / 修改时间：21:53:34" itemprop="dateCreated datePublished" datetime="2019-08-18T20:41:54+08:00">2019-08-18</time>
             </span>
           
 
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-08 23:06:14" itemprop="dateModified" datetime="2019-06-08T23:06:14+08:00">2019-06-08</time>
-              </span>
             
           
 
@@ -425,7 +413,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a></span>
 
                 
                 
@@ -463,14 +451,50 @@
       
 
       
-        <p>在Java里面，List转为Array是调用的Java的一个Arrays.copyOf()这个方法，查看了下源代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object[] toArray() &#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.copyOf(<span class="keyword">this</span>.elementData, <span class="keyword">this</span>.size);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; T[] copyOf(T[] original, <span class="keyword">int</span> newLength) &#123;</span><br><span class="line">        <span class="keyword">return</span> (T[]) copyOf(original, newLength, original.getClass());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> &lt;T,U&gt; T[] copyOf(U[] original, <span class="keyword">int</span> newLength, Class&lt;? extends T[]&gt; newType) &#123;</span><br><span class="line">        <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">        T[] copy = ((Object)newType == (Object)Object[].class)</span><br><span class="line">            ? (T[]) <span class="keyword">new</span> Object[newLength]</span><br><span class="line">            : (T[]) Array.newInstance(newType.getComponentType(), newLength);</span><br><span class="line">        System.arraycopy(original, <span class="number">0</span>, copy, <span class="number">0</span>,</span><br><span class="line">                         Math.min(original.length, newLength));</span><br><span class="line">        <span class="keyword">return</span> copy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">newInstance</span><span class="params">(Class&lt;?&gt; componentType, <span class="keyword">int</span> length)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> NegativeArraySizeException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> newArray(componentType, length);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>在这里需要注意的是在copyOf()方法中的那个三元表达式，也就是说在这里无论执行的true还是false，都会返回一个新的数组对象。而在这里有一行代码就是<code>((Object)newType == (Object)Object[]).class)，这一句看起来没什么，其实可以看参数</code>Class&lt;? extends T[]&gt; newType<code>和</code>Object<code>会发现这两个数组对象都被强转成了</code>Object<code>，而</code>==`比较符是不能比较不同类型的。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">te</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"ad"</span> == <span class="number">2</span>);</span><br><span class="line">        System.out.println((String.class == Object.class));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面的代码在代码的编译期就会被提示<code>==</code>不可以适用于上述的两种情况.如下：<br><img src="不可转截图.png" alt=""></p>
-<p>那么回到正题，这里其实仔细看就会发现无论是否相等，在这里三元表达式中，都会返回一个新的数组对象，那么在这里加入了三元表达式的想法是<code>newInstance()</code>是通过反射进行创建的，而<code>new Object[]</code>则是非反射创建的.</p>
+        <h2 id="什么是幻读"><a href="#什么是幻读" class="headerlink" title="什么是幻读"></a>什么是幻读</h2><p>幻读表示的是在一个事物里面 同一个<code>select</code>语句，前后两次查询出来的结果是不相同的，需要注意的一点是，在InnoDB里面，幻读跟事物的隔离级别有关，更加准确的说是跟一个事物的快照和当前读有关</p>
+<p>下面是在Mysql8.0.11版本下进行幻读的复现：</p>
+<ul>
+<li>引擎：InnoDB</li>
+<li>事物隔离级别：Read Commited</li>
+</ul>
+<h3 id="MVCC和快照读以及当前读"><a href="#MVCC和快照读以及当前读" class="headerlink" title="MVCC和快照读以及当前读"></a>MVCC和快照读以及当前读</h3><h4 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h4><p>在介绍MVCC之前先来介绍下MVCC为什么会出现，首先数据库作为一个数据存储工具，那么肯定是存在并发的情况，<br>在Mysql的InnoDB里面最常见的就是<code>x</code>锁，这是一种写锁，在并发的情况下只有一个事务会获取该锁，其他事务则会一直等待直至获取到该锁。</p>
+<p>那么在读取的时候如何保证并发的事物都能正确的读取到自己正确的数据呢？</p>
+<p>在MVCC的概念里面，如果事务的隔离级别是<code>Read Commited</code>的话，那么每一次的快照都都会读取该行的最近一次<code>commited</code>数据，而如果是<code>Repeatable Read</code>的话，则是会读取当前事务ID开始之前的一次<code>commited</code>数据。</p>
+<p>所以MVCC仅仅是作为一个保证数据库并发读情况下的一个数据正确的手段而已，在不同的数据库里面，有不同的实现，例如在<code>OceanBase</code>里面，是通过操作链来解决并发读的问题</p>
+<h4 id="快照读"><a href="#快照读" class="headerlink" title="快照读"></a>快照读</h4><p>快照读是利用MVCC和 <code>undo log</code> 来实现的，其主要作用就是当我们对某行数据修改之后，并不会将原值修改，而是在上一个版本上面再新建一个版本(修改InnoDB的隐藏两列)。<br>所以在不同的隔离级别下，可以根据自己的<code>事物ID</code>来获取自己所需要的数据。当第一条不满足的时候，会沿着<code>undo log</code>一直寻找，在<code>Read Commited</code>隔离级别下就是直接找出该行数据最后一次提交的版本</p>
+<h4 id="当前读"><a href="#当前读" class="headerlink" title="当前读"></a>当前读</h4><p>当前读是对数据的加锁读取，读取的都是最新的数据，例如如下SQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select ... for update</span><br><span class="line">select ... in share mode</span><br><span class="line">insert</span><br><span class="line">update</span><br><span class="line">delete</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>同时也需要注意的一点是，当前读会对涉及到的行都进行加锁</p>
+<h4 id="为什么会有当前读和快找读"><a href="#为什么会有当前读和快找读" class="headerlink" title="为什么会有当前读和快找读"></a>为什么会有当前读和快找读</h4><p>按照Mysql官方的解释，当前读是为了防止其他事物修改你即将进行的操作</p>
 <blockquote>
-<p>Because reflection involves types that are dynamically resolved, certain Java virtual machine optimizations can not be performed. Consequently, reflective operations have slower performance than their non-reflective counterparts, and should be avoided in sections of code which are called frequently in performance-sensitive applications.</p>
+<p>If you query data and then insert or update related data within the same transaction, the regular SELECT statement does not give enough protection. Other transactions can update or delete the same rows you just queried. InnoDB supports two types of locking reads that offer extra safety</p>
 </blockquote>
-<p>所以在这里加一个判断使代码尽量通过非反射的方式进行创建。最后调用<code>System.arraycopy()</code>,但是这里的都已经强转成了Object，应该不会有失败的情况</p>
+<h3 id="幻读发生的条件"><a href="#幻读发生的条件" class="headerlink" title="幻读发生的条件"></a>幻读发生的条件</h3><p>首先解释下Mysql官方对于幻读的解释：</p>
+<blockquote>
+<p>The so-called phantom problem occurs within a transaction when the same query produces different sets of rows at different times. For example, if a SELECT is executed twice, but returns a row the second time that was not returned the first time, the row is a “phantom” row.</p>
+</blockquote>
+<p>这里Mysql官方虽然只是给出了对于<code>幻行</code>的定义，但是仍然可以简单解释下，也就是说两次的<code>select</code>前后得到的结果集是不同的，那么新多出来的一行就可以称之为<code>幻行</code></p>
+<p><strong>在这里特别需要注意的是，在PR隔离界别下，只有当前读才会出现幻读</strong></p>
+<h4 id="Read-Commited"><a href="#Read-Commited" class="headerlink" title="Read Commited"></a>Read Commited</h4><p>在<code>Read Commited</code>隔离级别下，每一次的<code>select</code> 都是一次快照读，所以在该隔离级别下，幻读可以在快照读和当前读发生。</p>
+<blockquote>
+<p>事务一<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set session transaction isolation level read committed;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; START TRANSACTION;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from szh.t1</span><br><span class="line">    -&gt; ;</span><br><span class="line">+---------+-----------+</span><br><span class="line">| area_id | order_num |</span><br><span class="line">+---------+-----------+</span><br><span class="line">|       1 |        22 |</span><br><span class="line">|       2 |        10 |</span><br><span class="line">+---------+-----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from `szh`.`t1`;</span><br><span class="line">+---------+-----------+</span><br><span class="line">| area_id | order_num |</span><br><span class="line">+---------+-----------+</span><br><span class="line">|       1 |        22 |</span><br><span class="line">|       2 |        10 |</span><br><span class="line">+---------+-----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>事务二<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `szh`.`t1`(`area_id`, `order_num`) VALUES (3, 22);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>此时<code>事务一</code>再进行select<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from `szh`.`t1`;</span><br><span class="line">+---------+-----------+</span><br><span class="line">| area_id | order_num |</span><br><span class="line">+---------+-----------+</span><br><span class="line">|       1 |        22 |</span><br><span class="line">|       2 |        10 |</span><br><span class="line">|       3 |        22 |</span><br><span class="line">+---------+-----------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>于是幻读发生了</p>
+<h4 id="Repeatable-Read"><a href="#Repeatable-Read" class="headerlink" title="Repeatable Read"></a>Repeatable Read</h4><p>那么如果在<code>Repeatable Read</code>隔离级别下，上面的SQL在执行一遍会出现什么情况呢？</p>
+<blockquote>
+<p>事务一<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; START TRANSACTION;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT * FROM `t1`</span><br><span class="line">    -&gt; ;</span><br><span class="line">+---------+-----------+</span><br><span class="line">| area_id | order_num |</span><br><span class="line">+---------+-----------+</span><br><span class="line">|       1 |        22 |</span><br><span class="line">|       2 |        10 |</span><br><span class="line">|       3 |        22 |</span><br><span class="line">|       4 |        33 |</span><br><span class="line">|       5 |        55 |</span><br><span class="line">+---------+-----------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>事务二<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `szh`.`t1`(`area_id`, `order_num`) VALUES (6, 66);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>事务一再次select<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM `t1`;</span><br><span class="line">+---------+-----------+</span><br><span class="line">| area_id | order_num |</span><br><span class="line">+---------+-----------+</span><br><span class="line">|       1 |        22 |</span><br><span class="line">|       2 |        10 |</span><br><span class="line">|       3 |        22 |</span><br><span class="line">|       4 |        33 |</span><br><span class="line">|       5 |        55 |</span><br><span class="line">+---------+-----------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>可以看到的是在快照读下面，是没有幻读出现的，那么修改select为当前读呢？<br>在事务一里面再次执行以下SQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM `t1` for update;</span><br><span class="line">+---------+-----------+</span><br><span class="line">| area_id | order_num |</span><br><span class="line">+---------+-----------+</span><br><span class="line">|       1 |        22 |</span><br><span class="line">|       2 |        10 |</span><br><span class="line">|       3 |        22 |</span><br><span class="line">|       4 |        33 |</span><br><span class="line">|       5 |        55 |</span><br><span class="line">|       6 |        66 |</span><br><span class="line">+---------+-----------+</span><br><span class="line">6 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>可以看到确实出现了两次的select不同的情况。<br>所以需要强调一点的是，在<code>Repeatable Read</code>隔离级别下，只有当前读才会出现幻读，因为在该级别下，快照读是从<code>begin</code>开始的第一个普通<code>select</code>建立的<code>Read View</code>，以后的普通<code>select</code>都是基于第一次的<code>select</code>，自然而然不会出现幻读了 </p>
 
       
     </div>
@@ -497,7 +521,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/java基础/" rel="tag"># java基础</a>
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
           
         </div>
       
@@ -510,8 +534,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/06/初识7层模型/" rel="next" title="初识7层模型和5层模型">
-                <i class="fa fa-chevron-left"></i> 初识7层模型和5层模型
+              <a href="/2019/08/04/Mysql数据库出现死锁的情况-一/" rel="next" title="Mysql数据库出现死锁的情况(一)">
+                <i class="fa fa-chevron-left"></i> Mysql数据库出现死锁的情况(一)
               </a>
             
           </div>
@@ -519,10 +543,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/08/git代码同步之间的冲突/" rel="prev" title="git代码同步之间的冲突">
-                git代码同步之间的冲突 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -566,8 +586,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -852,6 +881,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是幻读"><span class="nav-number">1.</span> <span class="nav-text">什么是幻读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC和快照读以及当前读"><span class="nav-number">1.1.</span> <span class="nav-text">MVCC和快照读以及当前读</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC"><span class="nav-number">1.1.1.</span> <span class="nav-text">MVCC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快照读"><span class="nav-number">1.1.2.</span> <span class="nav-text">快照读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当前读"><span class="nav-number">1.1.3.</span> <span class="nav-text">当前读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么会有当前读和快找读"><span class="nav-number">1.1.4.</span> <span class="nav-text">为什么会有当前读和快找读</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#幻读发生的条件"><span class="nav-number">1.2.</span> <span class="nav-text">幻读发生的条件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Read-Commited"><span class="nav-number">1.2.1.</span> <span class="nav-text">Read Commited</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Repeatable-Read"><span class="nav-number">1.2.2.</span> <span class="nav-text">Repeatable Read</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
