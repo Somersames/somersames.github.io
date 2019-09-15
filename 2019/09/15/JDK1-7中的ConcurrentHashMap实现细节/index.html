@@ -94,18 +94,20 @@
 
 
 
-  <meta name="description" content="异步上传文件：用Jquery的异步上传文件的时候需要引入一个js文件jquery.form.min.js，用这个文件里面的$.ajaxSubmit()方法来实现一个异步的文件上传功能。12345678910111213141516171819$(this).ajaxSubmit(&amp;#123;           type:&amp;apos;POST&amp;apos;,           url: &amp;quot">
-<meta name="keywords" content="spring,jquery">
+  <meta name="description" content="简介在JDK1.7向JDK1.8升级的过程中，ConcurrentHashMap由原来的可重入锁和CAS锁直接被替换为synchronized关键字了，虽然说在功能上都是完全一致的，但是在这里一直都有一个疑惑，既然在1.7的使用过程中没什么问题，那到底是出于什么原因要将其替换呢。 JDK1.7中的ConcurrentHashMap在JDK1.7中，其结构是由一个可重入锁Segment数组和每一个节">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="利用Jquery和Spring异步上传文件">
-<meta property="og:url" content="https://somersames.github.io/2018/03/29/利用Jquery和Spring异步上传文件/index.html">
+<meta property="og:title" content="JDK1.7中的ConcurrentHashMap实现细节(二)">
+<meta property="og:url" content="https://somersames.github.io/2019/09/15/JDK1-7中的ConcurrentHashMap实现细节/index.html">
 <meta property="og:site_name" content="Somersames">
-<meta property="og:description" content="异步上传文件：用Jquery的异步上传文件的时候需要引入一个js文件jquery.form.min.js，用这个文件里面的$.ajaxSubmit()方法来实现一个异步的文件上传功能。12345678910111213141516171819$(this).ajaxSubmit(&amp;#123;           type:&amp;apos;POST&amp;apos;,           url: &amp;quot">
+<meta property="og:description" content="简介在JDK1.7向JDK1.8升级的过程中，ConcurrentHashMap由原来的可重入锁和CAS锁直接被替换为synchronized关键字了，虽然说在功能上都是完全一致的，但是在这里一直都有一个疑惑，既然在1.7的使用过程中没什么问题，那到底是出于什么原因要将其替换呢。 JDK1.7中的ConcurrentHashMap在JDK1.7中，其结构是由一个可重入锁Segment数组和每一个节">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-08T15:06:14.269Z">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/1.7ConcurrentHashMap.png">
+<meta property="og:updated_time" content="2019-09-15T12:48:37.657Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="利用Jquery和Spring异步上传文件">
-<meta name="twitter:description" content="异步上传文件：用Jquery的异步上传文件的时候需要引入一个js文件jquery.form.min.js，用这个文件里面的$.ajaxSubmit()方法来实现一个异步的文件上传功能。12345678910111213141516171819$(this).ajaxSubmit(&amp;#123;           type:&amp;apos;POST&amp;apos;,           url: &amp;quot">
+<meta name="twitter:title" content="JDK1.7中的ConcurrentHashMap实现细节(二)">
+<meta name="twitter:description" content="简介在JDK1.7向JDK1.8升级的过程中，ConcurrentHashMap由原来的可重入锁和CAS锁直接被替换为synchronized关键字了，虽然说在功能上都是完全一致的，但是在这里一直都有一个疑惑，既然在1.7的使用过程中没什么问题，那到底是出于什么原因要将其替换呢。 JDK1.7中的ConcurrentHashMap在JDK1.7中，其结构是由一个可重入锁Segment数组和每一个节">
+<meta name="twitter:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/1.7ConcurrentHashMap.png">
 
 
 
@@ -115,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="https://somersames.github.io/2018/03/29/利用Jquery和Spring异步上传文件/"/>
+  <link rel="canonical" href="https://somersames.github.io/2019/09/15/JDK1-7中的ConcurrentHashMap实现细节/"/>
 
 
 
@@ -125,7 +127,7 @@
   };
 </script>
 
-  <title>利用Jquery和Spring异步上传文件 | Somersames</title>
+  <title>JDK1.7中的ConcurrentHashMap实现细节(二) | Somersames</title>
   
 
 
@@ -351,7 +353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2018/03/29/利用Jquery和Spring异步上传文件/"/>
+    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2019/09/15/JDK1-7中的ConcurrentHashMap实现细节/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Somersames"/>
@@ -368,7 +370,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">利用Jquery和Spring异步上传文件
+          <h1 class="post-title" itemprop="name headline">JDK1.7中的ConcurrentHashMap实现细节(二)
 
               
             
@@ -394,23 +396,13 @@
                 
               
 
-              <time title="创建时间：2018-03-29 11:28:04" itemprop="dateCreated datePublished" datetime="2018-03-29T11:28:04+08:00">2018-03-29</time>
+              <time title="创建时间：2019-09-15 20:35:02 / 修改时间：20:48:37" itemprop="dateCreated datePublished" datetime="2019-09-15T20:35:02+08:00">2019-09-15</time>
             </span>
           
 
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-08 23:06:14" itemprop="dateModified" datetime="2019-06-08T23:06:14+08:00">2019-06-08</time>
-              </span>
             
           
 
@@ -461,15 +453,35 @@
       
 
       
-        <h2 id="异步上传文件："><a href="#异步上传文件：" class="headerlink" title="异步上传文件："></a>异步上传文件：</h2><p>用Jquery的异步上传文件的时候需要引入一个js文件<code>jquery.form.min.js</code>，用这个文件里面的$.ajaxSubmit()方法来实现一个异步的文件上传功能。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$(this).ajaxSubmit(&#123;</span><br><span class="line">           type:&apos;POST&apos;,</span><br><span class="line">           url: &quot;/uploadfile&quot;,</span><br><span class="line">           dataType: &apos;json&apos;,</span><br><span class="line">           data: serializeData,</span><br><span class="line">           contentType: false,</span><br><span class="line">           cache: false,</span><br><span class="line">           processData:false,</span><br><span class="line">           beforeSubmit: function() &#123;</span><br><span class="line">       &#125;,</span><br><span class="line">       uploadProgress: function (event, position, total, percentComplete)&#123;</span><br><span class="line">       &#125;,</span><br><span class="line">       success:function()&#123;</span><br><span class="line"></span><br><span class="line">       &#125;,</span><br><span class="line">       error:function(data)&#123;</span><br><span class="line">           alert(&apos;上传图片出错&apos;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure></p>
-<p>在这里的话<code>$(&quot;&quot;)</code>函数需要是form的id，而且<code>beforeSubmit</code>可以在上传文件之前可以做一些检查，例如文件后缀或者文件大小之类的检查。</p>
-<p>在后端的话接受上传的文件其实跟Servlet差不多，主要是从request中获取请求流，参数的话需要标记为这个<code>@RequestParam(&quot;file&quot;) MultipartFile file</code>,最后在SpringMvc中有一个方法可以将上传的文件通过移动或者复制然后转移到我们指定的文件夹中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void transferTo(java.io.File dest)</span><br><span class="line">         throws java.io.IOException,</span><br><span class="line">                java.lang.IllegalStateException</span><br><span class="line">Transfer the received file to the given destination file.</span><br><span class="line">This may either move the file in the filesystem, copy the file in the filesystem, or save memory-held contents to the destination file. If the destination file already exists, it will be deleted first.</span><br><span class="line"></span><br><span class="line">If the target file has been moved in the filesystem, this operation cannot be invoked again afterwards. Therefore, call this method just once in order to work with any storage mechanism.</span><br><span class="line"></span><br><span class="line">NOTE: Depending on the underlying provider, temporary storage may be container-dependent, including the base directory for relative destinations specified here (e.g. with Servlet 3.0 multipart handling). For absolute destinations, the target file may get renamed/moved from its temporary location or newly copied, even if a temporary copy already exists.</span><br><span class="line"></span><br><span class="line">Parameters:</span><br><span class="line">dest - the destination file (typically absolute)</span><br><span class="line">Throws:</span><br><span class="line">java.io.IOException - in case of reading or writing errors</span><br><span class="line">java.lang.IllegalStateException - if the file has already been moved in the filesystem and is not available anymore for another transfer</span><br><span class="line">See Also:</span><br><span class="line">FileItem.write(File), Part.write(String)</span><br></pre></td></tr></table></figure></p>
-<p>也就是说这个方法<code>transferTo</code>会将接收到的文件移动或者copy到指定的位置。<br>那么在Controller中的主要方法体是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value = &quot;/uploadfile&quot; ,method = RequestMethod.POST)</span><br><span class="line">        @ResponseBody</span><br><span class="line">        public String uploadfile( @RequestParam(&quot;file&quot;) MultipartFile file) throws IOException &#123;</span><br><span class="line">        Map&lt;String ,Object&gt; map =new HashMap&lt;&gt;();</span><br><span class="line">        /*  上传的文件为空 */</span><br><span class="line">        if(file ==  null || file.isEmpty())&#123;</span><br><span class="line">            map.put(&quot;code&quot;,&quot;0&quot;);</span><br><span class="line">            map.put(&quot;msg&quot;,&quot;fail&quot;);</span><br><span class="line">            return JSON.toJSONString(map);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            String rootPath = &quot;D:\\disk&quot;;</span><br><span class="line">            File dir = new File(rootPath + File.separator + &quot;tmpFiles&quot;);</span><br><span class="line">            File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());</span><br><span class="line">            file.transferTo(serverFile);</span><br><span class="line">            map.put(&quot;code&quot;,&quot;1&quot;);</span><br><span class="line">            map.put(&quot;msg&quot;,&quot;success&quot;);</span><br><span class="line">            return JSON.toJSONString(map);</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
-<p>这个方法的话如果文件上传成功会返回一个json格式的信息，从而提示前端文件已经上传成功了。</p>
-<h2 id="生成验证码："><a href="#生成验证码：" class="headerlink" title="生成验证码："></a>生成验证码：</h2><p>在这里的话顺带在说下关于验证码的事情，在Spring里面使用验证码的话可以使用google的<code>kaptcha</code>这个jar包，因为在maven仓库中的话是没有这个版本的，所以这个需要自己下载到本地然后通过命令行导入，最后才可以在pom文件中引用这个包；导入方法如下：<br><code>mvn install:install-file  -Dfile=jar包位置 -DgroupId=com.google.code -DartifactId=kaptcha -Dversion=2.3.2 -Dpackaging=jar</code>，这样在pom文件中便可以引用了。<br>如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;com.google.code&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;kaptcha&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;2.3.2&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>同时在ApplicationContext.xml中添加一个bean.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;captchaProducer&quot; class=&quot;com.google.code.kaptcha.impl.DefaultKaptcha&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;config&quot;&gt;</span><br><span class="line">            &lt;bean class=&quot;com.google.code.kaptcha.util.Config&quot;&gt;</span><br><span class="line">                &lt;constructor-arg&gt;</span><br><span class="line">                    &lt;props&gt;</span><br><span class="line">                        &lt;!-- 图片边框 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.border&quot;&gt;no&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 图片宽度 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.image.width&quot;&gt;95&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 图片高度 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.image.height&quot;&gt;45&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 验证码背景颜色渐变，开始颜色 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.background.clear.from&quot;&gt;248,248,248&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 验证码背景颜色渐变，结束颜色 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.background.clear.to&quot;&gt;248,248,248&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 验证码的字符 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.textproducer.char.string&quot;&gt;0123456789abcdefghijklmnopqrstuvwxyz这是一个测试验证码的例子&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 验证码字体颜色 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.textproducer.font.color&quot;&gt;0,0,255&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 验证码的效果，水纹 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.obscurificator.impl&quot;&gt;com.google.code.kaptcha.impl.WaterRipple&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 验证码字体大小 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.textproducer.font.size&quot;&gt;35&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 验证码字数 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.textproducer.char.length&quot;&gt;4&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 验证码文字间距 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.textproducer.char.space&quot;&gt;2&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 验证码字体 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.textproducer.font.names&quot;&gt;new Font(&quot;Arial&quot;, 1, fontSize), new Font(&quot;Courier&quot;, 1, fontSize)&lt;/prop&gt;</span><br><span class="line">                        &lt;!-- 不加噪声 --&gt;</span><br><span class="line">                        &lt;prop key=&quot;kaptcha.noise.impl&quot;&gt;com.google.code.kaptcha.impl.NoNoise&lt;/prop&gt;</span><br><span class="line">                    &lt;/props&gt;</span><br><span class="line">                &lt;/constructor-arg&gt;</span><br><span class="line">            &lt;/bean&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
-<p>最后在Controller添加如下方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value = &quot;verificationcode&quot;, method = RequestMethod.GET)</span><br><span class="line">    public ModelAndView Verificationcode(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,</span><br><span class="line">                                         @RequestParam(value = &quot;timestamp&quot;, required = false) String timestamp) throws IOException &#123;</span><br><span class="line">        /* 添加时间戳，以设置验证码的过期时间*/</span><br><span class="line">        if (timestamp == null || timestamp.length() == 0) &#123;</span><br><span class="line">            modelAndView.addObject(&quot;timestamp&quot;, System.currentTimeMillis());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            modelAndView.addObject(&quot;timestamp&quot;, timestamp);</span><br><span class="line">        &#125;</span><br><span class="line">        response.setDateHeader(&quot;Expires&quot;, 0);</span><br><span class="line">        response.setHeader(&quot;Cache-Control&quot;, &quot;no-store, no-cache, must-revalidate&quot;);</span><br><span class="line">        response.addHeader(&quot;Cache-Control&quot;, &quot;post-check=0, pre-check=0&quot;);</span><br><span class="line">        response.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);</span><br><span class="line">        response.setContentType(&quot;image/jpeg&quot;);</span><br><span class="line">        String capText = captchaProducer.createText();</span><br><span class="line">        request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, capText);</span><br><span class="line">        BufferedImage bi = captchaProducer.createImage(capText);</span><br><span class="line">        ServletOutputStream out = response.getOutputStream();</span><br><span class="line">        ImageIO.write(bi, &quot;jpg&quot;, out);</span><br><span class="line">        try &#123;</span><br><span class="line">            out.flush();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            out.close();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>最后在前端页面引用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;verificationcode&quot;&gt;  //在这里随意设置宽度和高度即可。</span><br></pre></td></tr></table></figure></p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在JDK1.7向JDK1.8升级的过程中，<code>ConcurrentHashMap</code>由原来的可重入锁和<code>CAS</code>锁直接被替换为<code>synchronized</code>关键字了，虽然说在功能上都是完全一致的，但是在这里一直都有一个疑惑，既然在1.7的使用过程中没什么问题，那到底是出于什么原因要将其替换呢。</p>
+<h2 id="JDK1-7中的ConcurrentHashMap"><a href="#JDK1-7中的ConcurrentHashMap" class="headerlink" title="JDK1.7中的ConcurrentHashMap"></a>JDK1.7中的ConcurrentHashMap</h2><p>在JDK1.7中，其结构是由一个可重入锁<code>Segment</code>数组和每一个节点下的<code>HashEntry</code>数组来实现的。结构图如下:<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/1.7ConcurrentHashMap.png" alt=""></p>
+<p>由于 segment 是一个锁，所以如果在并发的过程中，多个线程尝试向一个 segment 中的 HashEntry 进行插入的时候，只能有一个线程会获取到锁，其他的线程会被阻塞直至锁被释放，所以这个容器是一个并发安全的。</p>
+<!--那么为什么是一个可重入锁呢，-->
+<p>查看 put 方法的调用链的时候，可以发现最终都是调用的是<code>Segment</code>的<code>put</code>方法。</p>
+<p><code>segment</code> 类在 <code>ConCurrentHashMap</code> 中的变量是以一个数组的形式所存在的，由于<code>segment</code>继承了 ReentrantLock ，所以是它也是一个可重入锁，因此在<code>JDK1.7</code>里面，是通过 <code>segment</code>的 重入锁机制来实现并发的写入。同时也可以发现如果调用的是<code>ConcurrentHashMap</code>的无参构造函数的话，那么初始化<code>Segment</code>数组大小就是16，当然这个数组大小其实是可以被调整的，但是无论怎样进行调整，最终 segment 数组的大小永远都是2的n次方。</p>
+<h2 id="Segment"><a href="#Segment" class="headerlink" title="Segment"></a>Segment</h2><p>在<code>ConcurrentHashMap</code>里面，一个<code>segment</code>就是一个<code>HashEntry</code>的数组，而一个<code>HashEntry</code>就是一个<code>bucket</code>。</p>
+<blockquote>
+<p>但是需要注意的是，ConcurrentHashMap 默认的 segment 数组的大小是16，也就是说最多只可能有16个线程同时进行处理</p>
+</blockquote>
+<p>当调用 put 方法的时候，会通过一个可重入锁的 CAS 操作来尝试获取该 segment 锁，如果获取到了则直接新建一个 Node 节点，如果还未获取到则直接调用<code>scanAndLockForPut</code>方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> HashEntry&lt;K,V&gt; <span class="title">scanAndLockForPut</span><span class="params">(K key, <span class="keyword">int</span> hash, V value)</span> </span>&#123;</span><br><span class="line">    HashEntry&lt;K,V&gt; first = entryForHash(<span class="keyword">this</span>, hash);</span><br><span class="line">    HashEntry&lt;K,V&gt; e = first;</span><br><span class="line">    HashEntry&lt;K,V&gt; node = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">int</span> retries = -<span class="number">1</span>; <span class="comment">// negative while locating node</span></span><br><span class="line">    <span class="keyword">while</span> (!tryLock()) &#123;</span><br><span class="line">        HashEntry&lt;K,V&gt; f; <span class="comment">// to recheck first below</span></span><br><span class="line">        <span class="keyword">if</span> (retries &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="comment">// speculatively create node</span></span><br><span class="line">                    node = <span class="keyword">new</span> HashEntry&lt;K,V&gt;(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">                retries = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (key.equals(e.key))</span><br><span class="line">                retries = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                e = e.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (++retries &gt; MAX_SCAN_RETRIES) &#123;</span><br><span class="line">            lock();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ((retries &amp; <span class="number">1</span>) == <span class="number">0</span> &amp;&amp;</span><br><span class="line">                 (f = entryForHash(<span class="keyword">this</span>, hash)) != first) &#123;</span><br><span class="line">            e = first = f; <span class="comment">// re-traverse if entry changed</span></span><br><span class="line">            retries = -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="scanAndLockForPut方法的作用"><a href="#scanAndLockForPut方法的作用" class="headerlink" title="scanAndLockForPut方法的作用"></a>scanAndLockForPut方法的作用</h3><p>在这个方法里面，会在 while 循环里面尝试 64 次，而且可以看到在这个循环语句里面有一些细节的操作。具体如下：</p>
+<ul>
+<li>判断当前头节点 first 是否为 null，是的话则初始化 node </li>
+<li>如果 first 不是 null，判断当前的 key 是否和 first 相等</li>
+<li>如果 first 即不为null，并且当前的 key 又不和入参的key相同，则直接寻找其 next 节点，直至 next 为null，然后进行第一步</li>
+</ul>
+<p>其实上面的一些步骤仅仅是该方法循环的第一步要做的，当上述三个步骤都进行完毕之后，首先会判断循环的次数是否已经大于 <code>MAX_SCAN_RETRIES</code> 如果是的话，则直接调用 <code>lock</code> 方法，如果不是的话则调用第三个判断。</p>
+<p>第三个判断中会判断当前循环次数是不是偶数，如果是的话则会判断当前的头节点还是不是之前的first，如果不是的话则需要重新将新的头节点赋值给 first 然后将循环次数改成1，再次重试。</p>
+<p>其实这个方法如果仔细看看，你会发现貌似没啥作用，因为返回的是 node，但是 node 一旦第一次被赋值之后，以后便不会做任何的更改，所以正如该方法的注释所说的一样，<strong>这个方法仅仅是为 JVM 做一个预热而已</strong>。</p>
+<h3 id="继续获取锁"><a href="#继续获取锁" class="headerlink" title="继续获取锁"></a>继续获取锁</h3><p>如果在 64 次以内还是未获取到该锁，则会调用<code>lock</code>方法，由于 ConcurrentHashMap 在初始化 segment 的时候，并未显式调用<code>ReentrantLock</code>的构造方法，而 ReentrantLock 又是默认初始化非公平锁，所以此时在 scanAndLockForPut 里面的 lock 其实调用的是 NonfairSync 里面的 lock 方法，即再次以非公平锁的方式来尝试获取锁<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (compareAndSetState(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">        setExclusiveOwnerThread(Thread.currentThread());</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        acquire(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当最后一次如果 CAS 操作还未获取到锁的时候，segment 就会调用<strong>acquire(1)</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">acquire</span><span class="params">(<span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!tryAcquire(arg) &amp;&amp;</span><br><span class="line">        acquireQueued(addWaiter(Node.EXCLUSIVE), arg))</span><br><span class="line">        selfInterrupt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这里可以看到的是 if 判断里面还是会再次尝试获取锁，当还未获取到锁的时候，就将该 Node 放入到 FIFO 队列的末尾，然后等待着被唤醒执行</p>
+<p>从上面的一个流程不难看出，在 segment 首先会以可重入锁的方式来尝试性的获取锁，当没取到的时候会<strong>while循环</strong>64次做一个预热，如果在循环的过程中还是未获取到锁，则会进行两次<code>CAS</code>操作(分别在两个不同的方法里面)，如果最终还是无法获取到锁的话，那么此时就会将自己放入到 AQS 中的 FIFO 队列。</p>
+<p>回过头来再看 segment 里面的第一行代码：</p>
+<blockquote>
+<p>HashEntry&lt;K,V&gt; node = tryLock() ? null : scanAndLockForPut(key, hash, value);</p>
+</blockquote>
+<p>那么可以看到的是，在JDK1.7里面，put方法如果在大量并发的情况下，如果要获取一个锁会进行非常多的操作，而且它默认的 segment 数组大小还是 16 ，也就是说map的所有键值，出现碰撞的概率不是 1/map.size()，而永远是 1/16。</p>
 
       
     </div>
@@ -496,9 +508,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/spring/" rel="tag"># spring</a>
-          
-            <a href="/tags/jquery/" rel="tag"># jquery</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -511,8 +521,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/28/页面布局以及jquery解析json的总结/" rel="next" title="页面布局以及JS解析json的总结">
-                <i class="fa fa-chevron-left"></i> 页面布局以及JS解析json的总结
+              <a href="/2019/09/08/Leetcode数组中连续分组/" rel="next" title="Leetcode数组中连续分组">
+                <i class="fa fa-chevron-left"></i> Leetcode数组中连续分组
               </a>
             
           </div>
@@ -520,10 +530,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/29/mysql的一些总结/" rel="prev" title="mysql的一些总结">
-                mysql的一些总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -873,7 +879,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步上传文件："><span class="nav-number">1.</span> <span class="nav-text">异步上传文件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成验证码："><span class="nav-number">2.</span> <span class="nav-text">生成验证码：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK1-7中的ConcurrentHashMap"><span class="nav-number">2.</span> <span class="nav-text">JDK1.7中的ConcurrentHashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segment"><span class="nav-number">3.</span> <span class="nav-text">Segment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scanAndLockForPut方法的作用"><span class="nav-number">3.1.</span> <span class="nav-text">scanAndLockForPut方法的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继续获取锁"><span class="nav-number">3.2.</span> <span class="nav-text">继续获取锁</span></a></li></ol></li></ol></div>
             
 
           </div>
