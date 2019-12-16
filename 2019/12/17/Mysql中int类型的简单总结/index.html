@@ -94,13 +94,20 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Somersames">
-<meta property="og:url" content="https://somersames.github.io/categories/Vue/index.html">
+  <meta name="description" content="问题首先问两个问题：  int(1)和int(10)有什么区别。 int(3)可以存储 10000 这个数字吗？ int(11)可以用来存储手机号么？  本次的源代码以及测试的 Mysql 版本均为 8.0.17 解释首先新建一个表，SQL如下：12345create table test_int(    id int(3) not null primary key ,    no int(5)">
+<meta name="keywords" content="Mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql中int类型的简单总结">
+<meta property="og:url" content="https://somersames.github.io/2019/12/17/Mysql中int类型的简单总结/index.html">
 <meta property="og:site_name" content="Somersames">
+<meta property="og:description" content="问题首先问两个问题：  int(1)和int(10)有什么区别。 int(3)可以存储 10000 这个数字吗？ int(11)可以用来存储手机号么？  本次的源代码以及测试的 Mysql 版本均为 8.0.17 解释首先新建一个表，SQL如下：12345create table test_int(    id int(3) not null primary key ,    no int(5)">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2019-12-17%E4%B8%8A%E5%8D%8812.25.08.png">
+<meta property="og:updated_time" content="2019-12-16T16:46:20.162Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Somersames">
+<meta name="twitter:title" content="Mysql中int类型的简单总结">
+<meta name="twitter:description" content="问题首先问两个问题：  int(1)和int(10)有什么区别。 int(3)可以存储 10000 这个数字吗？ int(11)可以用来存储手机号么？  本次的源代码以及测试的 Mysql 版本均为 8.0.17 解释首先新建一个表，SQL如下：12345create table test_int(    id int(3) not null primary key ,    no int(5)">
+<meta name="twitter:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2019-12-17%E4%B8%8A%E5%8D%8812.25.08.png">
 
 
 
@@ -110,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="https://somersames.github.io/categories/Vue/"/>
+  <link rel="canonical" href="https://somersames.github.io/2019/12/17/Mysql中int类型的简单总结/"/>
 
 
 
@@ -120,7 +127,7 @@
   };
 </script>
 
-  <title>分类: Vue | Somersames</title>
+  <title>Mysql中int类型的简单总结 | Somersames</title>
   
 
 
@@ -168,7 +175,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -238,7 +245,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -282,25 +289,6 @@
 
   
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 
   
 
@@ -349,171 +337,220 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Vue<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2019/12/17/Mysql中int类型的简单总结/"/>
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Somersames"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Somersames"/>
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/07/24/Vue里面相同页面不同URL的刷新解决方案/" itemprop="url">
-            
-              <span itemprop="name">Vue里面相同页面不同URL的刷新解决方案</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Mysql中int类型的简单总结
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-07-24T00:09:58+08:00"
-              content="2019-07-24">
-          07-24
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
 
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-17 00:33:00 / 修改时间：00:46:20" itemprop="dateCreated datePublished" datetime="2019-12-17T00:33:00+08:00">2019-12-17</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/27/vue里面冒号和非冒号区别/" itemprop="url">
-            
-              <span itemprop="name">vue里面冒号和非冒号区别</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-06-27T00:07:16+08:00"
-              content="2019-06-27">
-          06-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/05/27/在Vue中使用filters来进行字典值的转换/" itemprop="url">
-            
-              <span itemprop="name">在Vue中使用filters来进行字典值的转换</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-05-27T23:07:10+08:00"
-              content="2019-05-27">
-          05-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/05/20/Vue中nextTick的使用/" itemprop="url">
-            
-              <span itemprop="name">Vue中nextTick的使用</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-05-20T23:39:42+08:00"
-              content="2019-05-20">
-          05-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2018/10/31/Vue中使用router遇到无法跳转的问题/" itemprop="url">
-            
-              <span itemprop="name">Vue中使用router遇到无法跳转的问题</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-31T00:14:20+08:00"
-              content="2018-10-31">
-          10-31
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>首先问两个问题：</p>
+<ol>
+<li>int(1)和int(10)有什么区别。</li>
+<li>int(3)可以存储 10000 这个数字吗？</li>
+<li>int(11)可以用来存储手机号么？</li>
+</ol>
+<p>本次的源代码以及测试的 Mysql 版本均为 8.0.17</p>
+<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><p>首先新建一个表，SQL如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test_int(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">3</span>) <span class="keyword">not</span> <span class="literal">null</span> primary <span class="keyword">key</span> ,</span><br><span class="line">    <span class="keyword">no</span> <span class="built_in">int</span>(<span class="number">5</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    phone <span class="built_in">int</span>(<span class="number">11</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4;</span><br></pre></td></tr></table></figure></p>
+<p>当你执行完这个 SQL 以后，Mysql会发出一个如下提示：</p>
+<blockquote>
+<p>[2019-12-16 23:08:24] [HY000][1681] Integer display width is deprecated and will be removed in a future release.<br>首先不管这个提示，待会后文会解释的。</p>
+</blockquote>
+<p> 然后新增测试数据：<br> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span>.<span class="string">`test_int`</span> (<span class="string">`id`</span>, <span class="string">`no`</span>, <span class="string">`phone`</span>) <span class="keyword">VALUES</span> (<span class="number">10000</span>, <span class="number">1008611</span>, <span class="number">123124</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span>.<span class="string">`test_int`</span> (<span class="string">`id`</span>, <span class="string">`no`</span>, <span class="string">`phone`</span>) <span class="keyword">VALUES</span> (<span class="number">10</span>, <span class="number">134</span>, <span class="number">124</span>);</span><br></pre></td></tr></table></figure></p>
+<p> 然后再进行 select 查看。<br> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> mysql&gt; select * from test_int;</span><br><span class="line">+<span class="comment">-------+---------+--------+</span></span><br><span class="line">| id    | no      | phone  |</span><br><span class="line">+<span class="comment">-------+---------+--------+</span></span><br><span class="line">|    10 |     134 |    124 |</span><br><span class="line">| 10000 | 1008611 | 123124 |</span><br><span class="line">+<span class="comment">-------+---------+--------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></p>
+<p> 可以看到其实并没有影响到任何数据的插入，随后查询 Mysql 的官方文档，里面有这样的一段话</p>
+<blockquote>
+<p>If you specify ZEROFILL for a numeric column, MySQL automatically adds the UNSIGNED attribute to the column.</p>
+</blockquote>
+<p>随后再次新建一个表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test_int_zerofill(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">3</span>) <span class="keyword">unsigned</span> zerofill <span class="keyword">not</span> <span class="literal">null</span> primary <span class="keyword">key</span> ,</span><br><span class="line">    <span class="keyword">no</span> <span class="built_in">int</span>(<span class="number">5</span>) <span class="keyword">unsigned</span> zerofill <span class="keyword">not</span> <span class="literal">null</span> ,</span><br><span class="line">    phone <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">unsigned</span> zerofill</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4;</span><br><span class="line"></span><br><span class="line">The ZEROFILL attribute is deprecated and will be removed in a future release. <span class="keyword">Use</span> the <span class="keyword">LPAD</span> <span class="keyword">function</span> <span class="keyword">to</span> zero-<span class="keyword">pad</span> numbers, <span class="keyword">or</span> <span class="keyword">store</span> the formatted numbers <span class="keyword">in</span> a <span class="built_in">CHAR</span> column.</span><br></pre></td></tr></table></figure></p>
+<p>虽然提示 ZEROFILL 快要被废弃了，但是为了演示区别，所以暂时还是不管了。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from test_int_zerofill;</span><br><span class="line">+<span class="comment">-------+--------+-------------+</span></span><br><span class="line">| id    | no     | phone       |</span><br><span class="line">+<span class="comment">-------+--------+-------------+</span></span><br><span class="line">|   010 |  00010 | 00000000010 |</span><br><span class="line">| 12345 | 123456 | 00001234567 |</span><br><span class="line">+<span class="comment">-------+--------+-------------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></p>
+<p>所以对于问题1，所以 int(1) 和 int(10) 其实是没有区别的，唯一有区别的地方就在于如果使用了 <code>unsigned zerofill</code> 修饰的话，那么不足长度的会在左边进行补 0 ，而如果没有用 <code>unsigned zerofill</code> 进行修饰的话，可以说基本上是没有区别的。</p>
+<p>对于问题2，因为 int 括号里面的值与位数无关， 所以是可以的。<br>到此，对于执行第一个SQL所进行的提示，是因为 Mysql 也觉得其实没什么意义，而是更加推荐用 <code>LDAP()</code> 这个函数来判断。</p>
+<p>对于第二个问题，可以尝试一个手机号：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span>.<span class="string">`test_int_zerofill`</span> (<span class="string">`id`</span>, <span class="string">`no`</span>, <span class="string">`phone`</span>) <span class="keyword">VALUES</span> (<span class="number">10</span>, <span class="number">10</span>, <span class="number">13100000000</span>)</span><br><span class="line"></span><br><span class="line">[<span class="number">22001</span>][<span class="number">1264</span>] <span class="keyword">Data</span> truncation: <span class="keyword">Out</span> <span class="keyword">of</span> <span class="keyword">range</span> <span class="keyword">value</span> <span class="keyword">for</span> <span class="keyword">column</span> <span class="string">'phone'</span> <span class="keyword">at</span> <span class="keyword">row</span> <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>出现这个问题的原因在于 int 类型在 mysql 里面是四个字节，而一个字节是 8 位，所以在 mysql 里面，一个int 类型最多可以储存 2^31(一个符号位置)，也就是约 21 亿左右，无符号的也最多42亿，但是手机号最低也是11位，也就是 130 多亿。所以肯定是无法存储的。<br>下面是 Mysql 官方给出的 num 类型的存储范围<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2019-12-17%E4%B8%8A%E5%8D%8812.25.08.png" alt=""></p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>由于想看下 Mysql 到底是如何处理 int 类型的数值的，于是下载并且编译了 Mysql 的源码，一直跟着 debug，最后找到了 Mysql 判断 int 是否超长的一个代码，如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">type_conversion_status Field_long::store(<span class="keyword">double</span> nr) &#123;</span><br><span class="line">  ASSERT_COLUMN_MARKED_FOR_WRITE;</span><br><span class="line">  type_conversion_status error = TYPE_OK;</span><br><span class="line">  int32 res;</span><br><span class="line">  nr = rint(nr);</span><br><span class="line">  <span class="keyword">if</span> (unsigned_flag) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nr &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      res = <span class="number">0</span>;</span><br><span class="line">      error = TYPE_WARN_OUT_OF_RANGE;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nr &gt; (<span class="keyword">double</span>)UINT_MAX32) &#123;</span><br><span class="line">      res = UINT_MAX32;</span><br><span class="line">      set_warning(Sql_condition::SL_WARNING, ER_WARN_DATA_OUT_OF_RANGE, <span class="number">1</span>);</span><br><span class="line">      error = TYPE_WARN_OUT_OF_RANGE;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">      res = (int32)(ulong)nr;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (nr &lt; (<span class="keyword">double</span>)INT_MIN32) &#123;</span><br><span class="line">      res = (int32)INT_MIN32;</span><br><span class="line">      error = TYPE_WARN_OUT_OF_RANGE;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nr &gt; (<span class="keyword">double</span>)INT_MAX32) &#123;</span><br><span class="line">      res = (int32)INT_MAX32;</span><br><span class="line">      error = TYPE_WARN_OUT_OF_RANGE;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">      res = (int32)(longlong)nr;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (error)</span><br><span class="line">    set_warning(Sql_condition::SL_WARNING, ER_WARN_DATA_OUT_OF_RANGE, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> WORDS_BIGENDIAN</span></span><br><span class="line">  <span class="keyword">if</span> (table-&gt;s-&gt;db_low_byte_first) &#123;</span><br><span class="line">    int4store(ptr, res);</span><br><span class="line">  &#125; <span class="keyword">else</span></span><br><span class="line">#endif</span><br><span class="line">    longstore(ptr, res);</span><br><span class="line">  <span class="keyword">return</span> error;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这段代码里面，Mysql首先会判断是否带有符号位，如果是无符号位的话，则是直接判断是否大于 UINT_MAX32，而如果是有符号的话，则是判断是否小于 INT_MIN32 或者大于 INT_MAX32，否则直接为最小或者最大值，然后设置error。<br>PS：这一段代码是还未进行 InnoDB 引擎层，可以看到 Mysql 是在 Server 层进行SQL语句的校验。</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/09/java-validation-的国际化/" rel="next" title="java validation 的国际化">
+                <i class="fa fa-chevron-left"></i> java validation 的国际化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -533,8 +570,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -820,6 +866,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解释"><span class="nav-number">2.</span> <span class="nav-text">解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">3.</span> <span class="nav-text">源码</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -948,6 +1011,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   
 
@@ -963,6 +1030,8 @@
 
   
 
+
+  
 
 
   
