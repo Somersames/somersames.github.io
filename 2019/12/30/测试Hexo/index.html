@@ -94,18 +94,14 @@
 
 
 
-  <meta name="description" content="mybatis的orderby在使用mybatis的时候，一般来讲是使用#{}这种方式来设置sql的参数，因为mybatis在解析sql的时候的时候对于使用#{}的参数首先会解析成?,然后再加入参数。具体可以看mybatis的解析日志：12DEBUG [main] - ==&amp;gt;  Preparing: select * from clazzentity where clazz_name = ?">
-<meta name="keywords" content="web后端,mybatis">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis中sql排序以及#和$的区别(二)">
-<meta property="og:url" content="https://somersames.github.io/2018/04/12/Mybatisz中sql排序以及-和-的区别-二/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="测试Hexo">
+<meta property="og:url" content="https://somersames.github.io/2019/12/30/测试Hexo/index.html">
 <meta property="og:site_name" content="Somersames">
-<meta property="og:description" content="mybatis的orderby在使用mybatis的时候，一般来讲是使用#{}这种方式来设置sql的参数，因为mybatis在解析sql的时候的时候对于使用#{}的参数首先会解析成?,然后再加入参数。具体可以看mybatis的解析日志：12DEBUG [main] - ==&amp;gt;  Preparing: select * from clazzentity where clazz_name = ?">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-08T15:06:14.253Z">
+<meta property="og:updated_time" content="2019-12-30T04:03:15.148Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis中sql排序以及#和$的区别(二)">
-<meta name="twitter:description" content="mybatis的orderby在使用mybatis的时候，一般来讲是使用#{}这种方式来设置sql的参数，因为mybatis在解析sql的时候的时候对于使用#{}的参数首先会解析成?,然后再加入参数。具体可以看mybatis的解析日志：12DEBUG [main] - ==&amp;gt;  Preparing: select * from clazzentity where clazz_name = ?">
+<meta name="twitter:title" content="测试Hexo">
 
 
 
@@ -115,7 +111,7 @@
 
   
   
-  <link rel="canonical" href="https://somersames.github.io/2018/04/12/Mybatisz中sql排序以及-和-的区别-二/"/>
+  <link rel="canonical" href="https://somersames.github.io/2019/12/30/测试Hexo/"/>
 
 
 
@@ -125,7 +121,7 @@
   };
 </script>
 
-  <title>Mybatis中sql排序以及#和$的区别(二) | Somersames</title>
+  <title>测试Hexo | Somersames</title>
   
 
 
@@ -351,7 +347,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2018/04/12/Mybatisz中sql排序以及-和-的区别-二/"/>
+    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2019/12/30/测试Hexo/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Somersames"/>
@@ -368,7 +364,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mybatis中sql排序以及#和$的区别(二)
+          <h1 class="post-title" itemprop="name headline">测试Hexo
 
               
             
@@ -394,41 +390,12 @@
                 
               
 
-              <time title="创建时间：2018-04-12 23:30:16" itemprop="dateCreated datePublished" datetime="2018-04-12T23:30:16+08:00">2018-04-12</time>
+              <time title="创建时间：2019-12-30 12:03:15" itemprop="dateCreated datePublished" datetime="2019-12-30T12:03:15+08:00">2019-12-30</time>
             </span>
           
 
           
-            
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-08 23:06:14" itemprop="dateModified" datetime="2019-06-08T23:06:14+08:00">2019-06-08</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -461,22 +428,7 @@
       
 
       
-        <h2 id="mybatis的orderby"><a href="#mybatis的orderby" class="headerlink" title="mybatis的orderby"></a>mybatis的orderby</h2><p>在使用mybatis的时候，一般来讲是使用<code>#{}</code>这种方式来设置sql的参数，因为mybatis在解析sql的时候的时候对于使用<code>#{}</code>的参数首先会解析成<code>?</code>,然后再加入参数。具体可以看mybatis的解析日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DEBUG [main] - ==&gt;  Preparing: select * from clazzentity where clazz_name = ? </span><br><span class="line">DEBUG [main] - ==&gt; Parameters: 一年级(String)</span><br></pre></td></tr></table></figure></p>
-<p>但是在mybatis中如果需要使用groupby和orderby的话就需要注意不可以使用<code>#</code>了，因为使用<code>#</code>的话会导致解析出来的参数自动的带了一个引号,而使用<code>$</code>的话就会直接把参数带进去，所以在进行groupby的时候是需要使用<code>$</code>来进行参数的替换的。但是在使用${}这个的时候需要注意下。</p>
-<h1 id="mybatis的多参数和单参数"><a href="#mybatis的多参数和单参数" class="headerlink" title="mybatis的多参数和单参数"></a>mybatis的多参数和单参数</h1><h3 id="单参数"><a href="#单参数" class="headerlink" title="单参数"></a>单参数</h3><p>mybatis的单参数一般来讲是会自动被识别的，<code>#</code>的话直接可以加参数名称，<code>$</code>的话则是使用<code>_paramter</code>来接收</p>
-<h3 id="多参数"><a href="#多参数" class="headerlink" title="多参数"></a>多参数</h3><h4 id="param"><a href="#param" class="headerlink" title="param"></a>param</h4><p>mybatis中若需要使用多参数的话要么使用<code>@param</code>注解，要么使用集合或者对象来作为参数,其代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Map&lt;String,Object&gt;&gt; queryStudnet2(<span class="meta">@Param</span>(<span class="string">"CLAZZID"</span>) String clazzId ,<span class="meta">@Param</span>(<span class="string">"name"</span>) String name);</span><br></pre></td></tr></table></figure></p>
-<p>而其配置文件则如下图所示：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStudnet2"</span> <span class="attr">resultType</span>=<span class="string">"java.util.HashMap"</span> &gt;</span></span><br><span class="line">        select count(CLAZZ_ID) as 'id' , CLAZZ_ID from student GROUP by $&#123;CLAZZID&#125; order by $&#123;name&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>在${}里面的参数全部是@Param,所以这是一种多参数传递方式，同时这种方式进行传参的话#和$都可以解析，</p>
-<h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><p>List的传参应该只是适用于foreach迭代,也就是需要动态的执行多条语句的时候才会使用List</p>
-<h4 id="Java对象"><a href="#Java对象" class="headerlink" title="Java对象"></a>Java对象</h4><p>而Java对象传参的话在入参的地方需要加入Java对象的实体类，但是在查询需要返回结果的时候可以通过resultMap接收，不是一个map也可以是一个Java对象也可以接收，但是需要注意的是通过Java对象接收的话要java字段和sql的字段映射。一种就是已经说了的resultMap，另一种就是数据库返回字段设置别名然后让其返回的是Java对象的字段</p>
-<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><p>map则适用于多参数传递，类似于java对象<br>通过map传递参数的话是最常见的一种方式在传入<code>#{}</code>的动态参数，但是在使用map的方式的时候需要注意，通过map传值的话，用<code>${}</code>是接受不到的，会直接抛出异常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">### Error querying database.  Cause: org.apache.ibatis.builder.BuilderException: Error evaluating expression &apos;_paramter.clazz&apos;. Cause: org.apache.ibatis.ognl.OgnlException: source is null for getProperty(null, &quot;clazz&quot;)</span><br><span class="line">### Cause: org.apache.ibatis.builder.BuilderException: Error evaluating expression &apos;_paramter.clazz&apos;. Cause: org.apache.ibatis.ognl.OgnlException: source is null for getProperty(null, &quot;clazz&quot;)</span><br></pre></td></tr></table></figure></p>
-<p>所以map传值的话最好是传入需要<code>#{}</code>接受的参数</p>
-<h4 id="索引传参"><a href="#索引传参" class="headerlink" title="索引传参"></a>索引传参</h4><p>仅适用于#<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryStudnet3"</span> <span class="attr">resultType</span>=<span class="string">"java.util.HashMap"</span> &gt;</span></span><br><span class="line">        select count(CLAZZ_ID) as 'id' , CLAZZ_ID from student GROUP by #&#123;arg0&#125; order by #&#123;arg1&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>Java代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Dao层代码</span></span><br><span class="line">List&lt;Map&lt;String,Object&gt;&gt; queryStudnet3(String clazzId ,String name);</span><br><span class="line"><span class="comment">//实际方法</span></span><br><span class="line"> List&lt;Map&lt;String,Object&gt;&gt; list =clazz.queryStudnet3(<span class="string">"CLAZZ_ID"</span>,<span class="string">"id"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>通过这个方式传参的话需要注意mybatis的提示使用<code>arg0</code>还是<code>param</code></p>
-<h1 id="异常汇总"><a href="#异常汇总" class="headerlink" title="异常汇总"></a>异常汇总</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cause: org.apache.ibatis.executor.ExecutorException: A query was run and no Result Maps were found for the Mapped Statement &apos;study.dao.clazzStudent.queryStudnet2&apos;.  It&apos;s likely that neither a Result Type nor a Result Map was specified</span><br></pre></td></tr></table></figure>
-<p>这个表示若返回的是一个集合的话需要制定下返回的类型。其代码如下所示：</p>
-
+        
       
     </div>
 
@@ -497,17 +449,6 @@
 
     <footer class="post-footer">
       
-        
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/web后端/" rel="tag"># web后端</a>
-          
-            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
-          
-        </div>
-      
 
       
       
@@ -517,8 +458,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/11/PPython2-7使用Pandas连接数据库/" rel="next" title="Python2.7使用Pandas连接数据库">
-                <i class="fa fa-chevron-left"></i> Python2.7使用Pandas连接数据库
+              <a href="/2019/12/27/浅谈工厂模式/" rel="next" title="浅谈工厂模式">
+                <i class="fa fa-chevron-left"></i> 浅谈工厂模式
               </a>
             
           </div>
@@ -526,10 +467,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/13/Python使用Plotly来画图/" rel="prev" title="Python使用Plotly来画图">
-                Python使用Plotly来画图 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -573,17 +510,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -868,23 +796,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis的orderby"><span class="nav-number">1.</span> <span class="nav-text">mybatis的orderby</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis的多参数和单参数"><span class="nav-number"></span> <span class="nav-text">mybatis的多参数和单参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单参数"><span class="nav-number">0.1.</span> <span class="nav-text">单参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多参数"><span class="nav-number">0.2.</span> <span class="nav-text">多参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#param"><span class="nav-number">0.2.1.</span> <span class="nav-text">param</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List"><span class="nav-number">0.2.2.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java对象"><span class="nav-number">0.2.3.</span> <span class="nav-text">Java对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Map"><span class="nav-number">0.2.4.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引传参"><span class="nav-number">0.2.5.</span> <span class="nav-text">索引传参</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常汇总"><span class="nav-number"></span> <span class="nav-text">异常汇总</span></a></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
