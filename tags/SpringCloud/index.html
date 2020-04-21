@@ -96,7 +96,7 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="Somersames">
-<meta property="og:url" content="https://somersames.github.io/tags/springcloud/index.html">
+<meta property="og:url" content="https://somersames.github.io/tags/SpringCloud/index.html">
 <meta property="og:site_name" content="Somersames">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -110,7 +110,7 @@
 
   
   
-  <link rel="canonical" href="https://somersames.github.io/tags/springcloud/"/>
+  <link rel="canonical" href="https://somersames.github.io/tags/SpringCloud/"/>
 
 
 
@@ -120,7 +120,7 @@
   };
 </script>
 
-  <title>标签: springcloud | Somersames</title>
+  <title>标签: SpringCloud | Somersames</title>
   
 
 
@@ -356,7 +356,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>springcloud<small>标签</small>
+        <h1>SpringCloud<small>标签</small>
         </h1>
       </div>
 
@@ -368,37 +368,9 @@
 
       <h2 class="post-title">
         
-          <a class="post-title-link" href="/2018/06/11/SpringCloud配置中心的使用/" itemprop="url">
+          <a class="post-title-link" href="/2018/05/23/Spring-Cloud的Zuul相关总结/" itemprop="url">
             
-              <span itemprop="name">SpringCloud配置中心的使用</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-11T22:29:16+08:00"
-              content="2018-06-11">
-          06-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2018/04/22/springcloud的其他组件使用记录/" itemprop="url">
-            
-              <span itemprop="name">springcloud的其他组件使用记录之Config(四)</span>
+              <span itemprop="name">Spring Cloud的Zuul相关总结</span>
             
           </a>
         
@@ -406,93 +378,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-22T23:40:20+08:00"
-              content="2018-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2018/04/21/记一次springcloud使用feign导致的Excepted-authority-错误-三/" itemprop="url">
-            
-              <span itemprop="name">springcloud使用feign导致的Excepted authority 错误(三)</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-21T13:51:16+08:00"
-              content="2018-04-21">
-          04-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2018/04/20/springcloud的服务注册与负载均衡/" itemprop="url">
-            
-              <span itemprop="name">springcloud的服务注册与负载均衡</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-20T23:33:00+08:00"
-              content="2018-04-20">
-          04-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2018/04/18/spring-cloud初步了解/" itemprop="url">
-            
-              <span itemprop="name">spring cloud初步配置之起步</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-18T23:58:34+08:00"
-              content="2018-04-18">
-          04-18
+              datetime="2018-05-23T18:00:14+08:00"
+              content="2018-05-23">
+          05-23
         </time>
       </div>
 
@@ -1208,6 +1096,119 @@
                     resultItem += "<a href='" + articleUrl + "'>" +
                       "<p class=\"search-result\">" + highlightKeyword(content, slice) +
                       "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+    "...</p>" + "</a>";
                   });
 
                   resultItem += "</li>";
