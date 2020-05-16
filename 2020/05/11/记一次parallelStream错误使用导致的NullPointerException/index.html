@@ -105,7 +105,7 @@
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/%E8%AE%B0%E4%B8%80%E6%AC%A1parallelStream%E9%94%99%E8%AF%AF%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E7%9A%84NullPointerException/%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B.png">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/%E8%AE%B0%E4%B8%80%E6%AC%A1parallelStream%E9%94%99%E8%AF%AF%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E7%9A%84NullPointerException/List%E4%B8%BAnull.png">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/%E8%AE%B0%E4%B8%80%E6%AC%A1parallelStream%E9%94%99%E8%AF%AF%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E7%9A%84NullPointerException/merge%E4%B8%BA%E7%A9%BA.png">
-<meta property="og:updated_time" content="2020-05-10T16:24:45.536Z">
+<meta property="og:updated_time" content="2020-05-10T16:29:17.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次parallelStream错误使用导致的NullPointerException">
 <meta name="twitter:description" content="parallelStream在 Java8 中，新增了一个很有用的功能就是 流，这个功能可以使我们可以快速的写出优雅的代码，其中 stream 是一个串行流（说法可能有误…就是不会采取多线程来进行处理）。还有一种就是 parallelStream 采用 ForkJoinPool 来实现并发，加快执行效率。 所以在使用 parallelStream 的时候一定要注意线程安全的问题，首先看一段代码：">
@@ -398,7 +398,7 @@
                 
               
 
-              <time title="创建时间：2020-05-11 00:21:13 / 修改时间：00:24:45" itemprop="dateCreated datePublished" datetime="2020-05-11T00:21:13+08:00">2020-05-11</time>
+              <time title="创建时间：2020-05-11 00:21:13 / 修改时间：00:29:17" itemprop="dateCreated datePublished" datetime="2020-05-11T00:21:13+08:00">2020-05-11</time>
             </span>
           
 
@@ -468,7 +468,7 @@
 <p>出现异常情况的 <code>List</code> 如下：<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/%E8%AE%B0%E4%B8%80%E6%AC%A1parallelStream%E9%94%99%E8%AF%AF%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E7%9A%84NullPointerException/List%E4%B8%BAnull.png" alt=""></p>
 <p>然后在 <code>Collectors.toMap()</code> 方法里面最终会调用到 HashMap 的 merge 方法，而 HashMap 的 merge 方法第一行就是判断 <code>value</code> 是否为空，所以就导致了 <code>NullPointerException</code></p>
 <p><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/%E8%AE%B0%E4%B8%80%E6%AC%A1parallelStream%E9%94%99%E8%AF%AF%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E7%9A%84NullPointerException/merge%E4%B8%BA%E7%A9%BA.png" alt=""></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在使用 <code>parallelStream</code> 一定需要注意并发的安全，同时注意在重构代码的时候如果是这种并发流的话，一定要注意线程安全</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在使用 <code>parallelStream</code> 一定需要注意并发的安全，同时注意在重构代码的时候如果是这种并发流的话，一定要注意线程安全。</p>
 
       
     </div>
@@ -517,6 +517,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/16/阿里云SDK使用代理的一个坑/" rel="prev" title="阿里云SDK使用代理的一个坑">
+                阿里云SDK使用代理的一个坑 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -585,7 +589,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">140</span>
+                    <span class="site-state-item-count">141</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -670,7 +674,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
