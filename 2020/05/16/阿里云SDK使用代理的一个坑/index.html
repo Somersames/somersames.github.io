@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/%E9%98%BF%E9%87%8CSDK%E7%9A%84%E5%9D%91/ali-class-struct.png">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/%E9%98%BF%E9%87%8CSDK%E7%9A%84%E5%9D%91/default-config.png">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/%E9%98%BF%E9%87%8CSDK%E7%9A%84%E5%9D%91/solve-plan.png">
-<meta property="og:updated_time" content="2020-05-16T16:49:48.528Z">
+<meta property="og:updated_time" content="2020-05-16T16:55:15.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阿里云SDK使用代理的一个坑">
 <meta name="twitter:description" content="由于项目中需要使用阿里云的短信平台，所以直接引用了最新的SDK，版本号为 4.5.1。但是由于机器在内网环境，如果需要访问外部网络的话，需要代理机器。于是去看下 阿里的SDK 官方文档，如何支持代理访问，于是找到以下内容：  坑就坑在这个文档里面的设置方法，设置了并没有什么用。于是自己研究了下这种设置为什么不生效。 System.setProperty这个命令和在启动参数中加 -DXXX=XXX">
@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-17 00:49:48" itemprop="dateModified" datetime="2020-05-17T00:49:48+08:00">2020-05-17</time>
+                <time title="修改时间：2020-05-17 00:55:15" itemprop="dateModified" datetime="2020-05-17T00:55:15+08:00">2020-05-17</time>
               </span>
             
           
@@ -485,7 +485,7 @@
 <p>而且在这一行代码里面会进行 <code>HttpClientConfig</code> 的初始化，如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">DefaultAcsClient</span><span class="params">(IClientProfile profile, AlibabaCloudCredentialsProvider credentialsProvider)</span> </span>&#123;</span><br><span class="line">... 省略相关代码</span><br><span class="line">    <span class="keyword">this</span>.httpClient = HttpClientFactory.buildClient(<span class="keyword">this</span>.clientProfile);</span><br><span class="line">... 省略相关代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/%E9%98%BF%E9%87%8CSDK%E7%9A%84%E5%9D%91/default-config.png" alt=""></p>
-<p> 而在 <code>profile.getHttpClientConfig()</code> 里面，最终会默认初始化一个 Apache 的 Httpclient。<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpClientConfig <span class="title">getDefault</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    HttpClientConfig config = <span class="keyword">new</span> HttpClientConfig();</span><br><span class="line">    config.setClientType(HttpClientType.ApacheHttpClient);</span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 而在 <code>HttpClientConfig.getDefault()</code> 里面，最终会默认初始化一个 Apache 的 Httpclient。<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpClientConfig <span class="title">getDefault</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    HttpClientConfig config = <span class="keyword">new</span> HttpClientConfig();</span><br><span class="line">    config.setClientType(HttpClientType.ApacheHttpClient);</span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>至此为什么官方文档上写的 <code>System.setProperty</code> 不生效的原因终于找到了。也就是说，如果你是按照官方文档来写的代码，那么你通过 <code>System.setProperty</code> 来设置代理是肯定不是生效的。</p>
 <h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><ol>
 <li>将<code>HTTPS_PROXY</code> 或者 <code>HTTP_PROXY</code> 设置为系统环境变量（可以生效，但是不推荐）</li>
