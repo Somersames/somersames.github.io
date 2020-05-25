@@ -94,18 +94,25 @@
 
 
 
-  <meta name="description" content="关于ArrrayList扩容： 今天在面试的时候面试官提到过ArrayList扩容是原来的1.5倍加一，但是我看jdk1.8的时候是显示为1.5倍  查看源码： 123456789101112//Java1.8的扩容方法private void grow(int minCapacity) &amp;#123;       // overflow-conscious code       int oldCa">
-<meta name="keywords" content="java集合">
+  <meta name="description" content="在SpringBoot中，经常可以看到许多以 @Enable 开头的注解，例如：@EnableAutoConfiguration，@EnableAsync……，那么我们是否可以自己定义一个注解呢？ 其实自定义注解最终都是利用到了 ImportBeanDefinitionRegistrar 这个类，通过手动的方式，将一个类注册成为 Bean，然后在进行一系列的操作，下面就来看下 ImportBean">
+<meta name="keywords" content="Springboot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于ArrayList的所见所想">
-<meta property="og:url" content="https://somersames.github.io/2017/11/07/关于ArrayLIst的所见所想/index.html">
+<meta property="og:title" content="Springboot自定义@EnableXX注解">
+<meta property="og:url" content="https://somersames.github.io/2020/05/26/define-a-enable-anno-in-springboot/index.html">
 <meta property="og:site_name" content="Somersames">
-<meta property="og:description" content="关于ArrrayList扩容： 今天在面试的时候面试官提到过ArrayList扩容是原来的1.5倍加一，但是我看jdk1.8的时候是显示为1.5倍  查看源码： 123456789101112//Java1.8的扩容方法private void grow(int minCapacity) &amp;#123;       // overflow-conscious code       int oldCa">
+<meta property="og:description" content="在SpringBoot中，经常可以看到许多以 @Enable 开头的注解，例如：@EnableAutoConfiguration，@EnableAsync……，那么我们是否可以自己定义一个注解呢？ 其实自定义注解最终都是利用到了 ImportBeanDefinitionRegistrar 这个类，通过手动的方式，将一个类注册成为 Bean，然后在进行一系列的操作，下面就来看下 ImportBean">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-08T15:06:14.266Z">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/ImportBeanDefinitionRegistrar.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/AnnotationMetadata.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/project-tree.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/RestControllerTest.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/LogRegister.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/LogAop.png">
+<meta property="og:updated_time" content="2020-05-25T16:31:14.897Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于ArrayList的所见所想">
-<meta name="twitter:description" content="关于ArrrayList扩容： 今天在面试的时候面试官提到过ArrayList扩容是原来的1.5倍加一，但是我看jdk1.8的时候是显示为1.5倍  查看源码： 123456789101112//Java1.8的扩容方法private void grow(int minCapacity) &amp;#123;       // overflow-conscious code       int oldCa">
+<meta name="twitter:title" content="Springboot自定义@EnableXX注解">
+<meta name="twitter:description" content="在SpringBoot中，经常可以看到许多以 @Enable 开头的注解，例如：@EnableAutoConfiguration，@EnableAsync……，那么我们是否可以自己定义一个注解呢？ 其实自定义注解最终都是利用到了 ImportBeanDefinitionRegistrar 这个类，通过手动的方式，将一个类注册成为 Bean，然后在进行一系列的操作，下面就来看下 ImportBean">
+<meta name="twitter:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/ImportBeanDefinitionRegistrar.png">
 
 
 
@@ -115,7 +122,7 @@
 
   
   
-  <link rel="canonical" href="https://somersames.github.io/2017/11/07/关于ArrayLIst的所见所想/"/>
+  <link rel="canonical" href="https://somersames.github.io/2020/05/26/define-a-enable-anno-in-springboot/"/>
 
 
 
@@ -125,7 +132,7 @@
   };
 </script>
 
-  <title>关于ArrayList的所见所想 | Somersames</title>
+  <title>Springboot自定义@EnableXX注解 | Somersames</title>
   
 
 
@@ -351,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2017/11/07/关于ArrayLIst的所见所想/"/>
+    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2020/05/26/define-a-enable-anno-in-springboot/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Somersames"/>
@@ -368,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">关于ArrayList的所见所想
+          <h1 class="post-title" itemprop="name headline">Springboot自定义@EnableXX注解
 
               
             
@@ -394,23 +401,13 @@
                 
               
 
-              <time title="创建时间：2017-11-07 21:46:25" itemprop="dateCreated datePublished" datetime="2017-11-07T21:46:25+08:00">2017-11-07</time>
+              <time title="创建时间：2020-05-26 00:05:16 / 修改时间：00:31:14" itemprop="dateCreated datePublished" datetime="2020-05-26T00:05:16+08:00">2020-05-26</time>
             </span>
           
 
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-08 23:06:14" itemprop="dateModified" datetime="2019-06-08T23:06:14+08:00">2019-06-08</time>
-              </span>
             
           
 
@@ -423,7 +420,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Springboot/" itemprop="url" rel="index"><span itemprop="name">Springboot</span></a></span>
 
                 
                 
@@ -461,21 +458,31 @@
       
 
       
-        <h1 id="关于ArrrayList扩容："><a href="#关于ArrrayList扩容：" class="headerlink" title="关于ArrrayList扩容："></a>关于ArrrayList扩容：</h1><blockquote>
-<p>今天在面试的时候面试官提到过ArrayList扩容是原来的1.5倍加一，但是我看jdk1.8的时候是显示为1.5倍</p>
-</blockquote>
-<h3 id="查看源码："><a href="#查看源码：" class="headerlink" title="查看源码："></a>查看源码：</h3> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Java1.8的扩容方法</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// overflow-conscious code</span></span><br><span class="line">       <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">       <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">       <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">           newCapacity = minCapacity;</span><br><span class="line">       <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">           newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">       <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">       elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p> 那么ArrayList会是扩充1.5倍之后加一呢？</p>
+        <p>在SpringBoot中，经常可以看到许多以 <code>@Enable</code> 开头的注解，例如：<code>@EnableAutoConfiguration</code>，<code>@EnableAsync</code>……，那么我们是否可以自己定义一个注解呢？</p>
+<p>其实自定义注解最终都是利用到了 <code>ImportBeanDefinitionRegistrar</code> 这个类，通过手动的方式，将一个类注册成为 <code>Bean</code>，然后在进行一系列的操作，下面就来看下 <code>ImportBeanDefinitionRegistrar</code></p>
+<h2 id="ImportBeanDefinitionRegistrar"><a href="#ImportBeanDefinitionRegistrar" class="headerlink" title="ImportBeanDefinitionRegistrar"></a>ImportBeanDefinitionRegistrar</h2><p>这个类的代码如下：<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/ImportBeanDefinitionRegistrar.png" alt=""></p>
+<p>可以看到这个类的结构很简单，就是一个方法，那么下面来看下这两个参数是什么意思。</p>
+<h3 id="AnnotationMetadata"><a href="#AnnotationMetadata" class="headerlink" title="AnnotationMetadata"></a>AnnotationMetadata</h3><p>从字面的意思上可以看出来是一个注解的元数据，它的里面的的方法如下：<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/AnnotationMetadata.png" alt=""><br>都是一些获取注解信息的方法，那么第二个参数呢</p>
+<h3 id="BeanDefinitionRegistry"><a href="#BeanDefinitionRegistry" class="headerlink" title="BeanDefinitionRegistry"></a>BeanDefinitionRegistry</h3><p>从字面的意思上可以看出来这个类是用于注册 <code>Bean</code> 的，其中最常见的就是 <code>registerBeanDefinition</code> 方法。它提供了两个参数 <code>String beanName, BeanDefinition beanDefinition</code>，而具体使用，则来看看demo。</p>
+<h2 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h2><p>假设现在有一个需求是要写一个切面，这个切面负责打印<code>controller</code> 的log。但是可能某些系统有自己的日志格式，不太需要这个切面AOP，所以希望可以增加一个开关，然后是按需引用。<br>下面就来开始写一个这样的demo，项目结构如下：<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/project-tree.png" alt=""></p>
+<p>在这里为什么会初始化两个文件夹，是因为 <code>@SpringBootApplication</code> 这个注解会默认将当前目录以及它的下级目录下的 <code>Bean</code> 注入到容器中，所以新建一个同级目录<code>anno</code> 就是为了不让 <code>@SpringBootApplication</code> 加载切面。</p>
+<p>然后启动 <code>Application</code> 这个类，其中 <code>RestControllerTest</code> 就是一个很简单的 <code>Controller</code>，如下：<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/RestControllerTest.png" alt=""></p>
+<p>然后请求<code>http://localhost:8081/api/query/1</code>，可以看到在控制台没有任何的输出，那就说明自定义的切面还没有生效，此时在 <code>Application</code> 上添加我们的自定义注解，添加后代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableLog</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Application.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此时在此启动项目，你会发现已经已经在控制台有我们的日志log了。<br>实现的细节见下面几个类：</p>
+<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><h3 id="interface"><a href="#interface" class="headerlink" title="@interface"></a>@interface</h3><p>首先，我们需要定义一个注解，其代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Import</span>(&#123;LogRegister.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableLog &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这里使用了 <code>@Import</code> 这个注解，由于不是本文的重点，因此不讲述其作用,（后面讲自动装配的原理时会讲解）然后这里有一个 <code>LogRegistrar</code> 类，这个类就是实现自定义注解的关键。</p>
+<h3 id="LogRegister"><a href="#LogRegister" class="headerlink" title="LogRegister"></a>LogRegister</h3><p><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/LogRegister.png" alt=""></p>
+<p>这个类的作用，就是让 <code>BeanDefinitionRegistry</code> 将我们的 <code>LogAop</code> 注册成一个Bean，只有当注册成一个 <code>Bean</code> 以后，该切面才会生效。</p>
+<h3 id="LogAop"><a href="#LogAop" class="headerlink" title="LogAop"></a>LogAop</h3><p><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/how%20to%20define%20a%20annotion/LogAop.png" alt=""></p>
+<p>该类就是一个切面类，负责打印请求的耗时。自此，一个自定义注解就完成了，当第三方想接入该日志log的时候，就可以直接使用 <code>@EnableLog</code> 来开启。</p>
 <blockquote>
-<p>于是翻看以前的jdk源码，发现在jdk1.6的时候其代码确实是+1了<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java1.6版本的扩容方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">       modCount++;</span><br><span class="line">       <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">       <span class="keyword">if</span> (minCapacity &gt; oldCapacity) &#123;</span><br><span class="line">           Object oldData[] = elementData;</span><br><span class="line">           <span class="keyword">int</span> newCapacity = (oldCapacity * <span class="number">3</span>)/<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">           <span class="keyword">if</span> (newCapacity &lt; minCapacity)</span><br><span class="line">               newCapacity = minCapacity;</span><br><span class="line">           <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">           elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>ps：注意调整<code>@Pointcut</code> 的切点，否则会切不到</p>
 </blockquote>
-<h1 id="关于其扩容具体做法："><a href="#关于其扩容具体做法：" class="headerlink" title="关于其扩容具体做法："></a>关于其扩容具体做法：</h1><h3 id="jdk1-8"><a href="#jdk1-8" class="headerlink" title="jdk1.8"></a>jdk1.8</h3><p> 其次再jdk1.8中的ArrayList的一些分析：<br> 首先需要向List中添加元素的时候：</p>
+<p>这就是最简单的自定义注解了，至于里面涉及到的原理，后续可能会写一些文章来补充。</p>
+<p>如果需要查看源代码的话，可以访问如下 <code>github</code> 地址：</p>
 <blockquote>
-<p>调用 boolean add(E e);<br> 这个方法首先会调用 ensureCapacityInternal(int)方法<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ensureExplicitCapacity(minCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://github.com/Somersames/spring-doc-sample/tree/master/anno-test" target="_blank" rel="noopener">https://github.com/Somersames/spring-doc-sample/tree/master/anno-test</a></p>
 </blockquote>
-<p> 当第一次调用的时候因为在构造方法里面已经将设置为’elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA’<br> 所以第一次调用的时候是直接接着调用’private void ensureExplicitCapacity(int minCapacity)’方法。<br> 但是这里会发现一个问题就是jdk1.8并未提供初始的默认值，<br> 在jdk1.6中ArrayList的构造方法：<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>(<span class="number">10</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">super</span>();</span><br><span class="line">      <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span>+</span><br><span class="line">                                             initialCapacity);</span><br><span class="line">      <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
-<p> 但是在jdk1.8中却并未有默认的初始值：<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p> 而是提供了一个修改容量的方法：<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> minExpand = (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)</span><br><span class="line">           <span class="comment">// any size if not default element table</span></span><br><span class="line">           ? <span class="number">0</span></span><br><span class="line">           <span class="comment">// larger than default for default empty table. It's already</span></span><br><span class="line">           <span class="comment">// supposed to be at default size.</span></span><br><span class="line">           : DEFAULT_CAPACITY;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (minCapacity &gt; minExpand) &#123;</span><br><span class="line">           ensureExplicitCapacity(minCapacity);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -502,7 +509,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/java集合/" rel="tag"># java集合</a>
+            <a href="/tags/Springboot/" rel="tag"># Springboot</a>
           
         </div>
       
@@ -515,8 +522,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/06/安装hexo的一些注意事项/" rel="next" title="安装hexo的一些注意事项">
-                <i class="fa fa-chevron-left"></i> 安装hexo的一些注意事项
+              <a href="/2020/05/19/springboot-indirect-maven-rely/" rel="next" title="Springboot的maven间接依赖">
+                <i class="fa fa-chevron-left"></i> Springboot的maven间接依赖
               </a>
             
           </div>
@@ -524,10 +531,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/09/关于Java的HashMap/" rel="prev" title="关于Java的HashMap">
-                关于Java的HashMap <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -879,7 +882,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于ArrrayList扩容："><span class="nav-number">1.</span> <span class="nav-text">关于ArrrayList扩容：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看源码："><span class="nav-number">1.0.1.</span> <span class="nav-text">查看源码：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于其扩容具体做法："><span class="nav-number">2.</span> <span class="nav-text">关于其扩容具体做法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk1-8"><span class="nav-number">2.0.1.</span> <span class="nav-text">jdk1.8</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ImportBeanDefinitionRegistrar"><span class="nav-number">1.</span> <span class="nav-text">ImportBeanDefinitionRegistrar</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AnnotationMetadata"><span class="nav-number">1.1.</span> <span class="nav-text">AnnotationMetadata</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanDefinitionRegistry"><span class="nav-number">1.2.</span> <span class="nav-text">BeanDefinitionRegistry</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo"><span class="nav-number">2.</span> <span class="nav-text">demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义注解"><span class="nav-number">3.</span> <span class="nav-text">自定义注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#interface"><span class="nav-number">3.1.</span> <span class="nav-text">@interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LogRegister"><span class="nav-number">3.2.</span> <span class="nav-text">LogRegister</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LogAop"><span class="nav-number">3.3.</span> <span class="nav-text">LogAop</span></a></li></ol></li></ol></div>
             
 
           </div>
