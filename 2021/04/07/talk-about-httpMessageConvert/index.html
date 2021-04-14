@@ -95,6 +95,7 @@
 
 
   <meta name="description" content="背景随着业务系统的成熟，如果你的项目正好是公司的中台战略之一，但是下游系统的接收方式不统一，这一种情况在一些老的公司系统架构总经常出现，如果下游系统不方便兼容，那么就需要中台系统对外提供各种不同格式返回报文 内容协商简单说就是服务提供方根据客户端所支持的格式来返回对应的报文，在 Spring 中，REST API 基本上都是以 json 格式进行返回，而如果需要一个接口即支持 json，又支持其">
+<meta name="keywords" content="Springboot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring ContentNegotiation（内容协商）之使用篇（一）">
 <meta property="og:url" content="https://somersames.github.io/2021/04/07/talk-about-httpMessageConvert/index.html">
@@ -103,7 +104,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert/get_json.png">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert/get_xml.png">
-<meta property="og:updated_time" content="2021-04-10T13:29:32.882Z">
+<meta property="og:updated_time" content="2021-04-14T17:11:15.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring ContentNegotiation（内容协商）之使用篇（一）">
 <meta name="twitter:description" content="背景随着业务系统的成熟，如果你的项目正好是公司的中台战略之一，但是下游系统的接收方式不统一，这一种情况在一些老的公司系统架构总经常出现，如果下游系统不方便兼容，那么就需要中台系统对外提供各种不同格式返回报文 内容协商简单说就是服务提供方根据客户端所支持的格式来返回对应的报文，在 Spring 中，REST API 基本上都是以 json 格式进行返回，而如果需要一个接口即支持 json，又支持其">
@@ -411,11 +412,26 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-04-10 21:29:32" itemprop="dateModified" datetime="2021-04-10T21:29:32+08:00">2021-04-10</time>
+                <time title="修改时间：2021-04-15 01:11:15" itemprop="dateModified" datetime="2021-04-15T01:11:15+08:00">2021-04-15</time>
               </span>
             
           
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Springboot/" itemprop="url" rel="index"><span itemprop="name">Springboot</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -467,7 +483,7 @@
 </blockquote>
 <p>在这三种模式中，前面两种模式都是关闭，如果需要打开，可以通过以下方式来开启<br>1：重写 <code>WebMvcConfigurer</code>(Spring5.X以后推荐的实现类) 的 <code>configureContentNegotiation</code> 来设置为 true 即可<br>2：设置 spring.mvc.contentnegotiation.favor-path-extension=true 或者 pring.mvc.contentnegotiation.favor-parameter=true</p>
 <blockquote>
-<p>tips:如果是使用 Spring2.X以上的版本，不要开启 @EnableWebMvc 注解，否则会导致你的配置无效，如果需要开启该注解，则只能使用方法一重写 WebMvcConfigurer 了</p>
+<p>tips:如果是使用 Spring2.X以上的版本，不要开启 @EnableWebMvc 注解，否则会导致你的配置无效，如果需要开启该注解，则只能使用方法一重写 WebMvcConfigurer 了<br>并且还需要说明一点的是通过配置文件开启的话，需要设置 useSuffixPattern 为 true，重写 <code>configureContentNegotiation</code> 的已经默认为 true 了</p>
 </blockquote>
 <h1 id="三种模式"><a href="#三种模式" class="headerlink" title="三种模式"></a>三种模式</h1><h2 id="1：favorPathExtension-后缀模式"><a href="#1：favorPathExtension-后缀模式" class="headerlink" title="1：favorPathExtension 后缀模式"></a>1：favorPathExtension 后缀模式</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8081</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  mvc:</span></span><br><span class="line"><span class="attr">    contentnegotiation:</span></span><br><span class="line"><span class="attr">      favor-path-extension:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">      media-types:</span></span><br><span class="line"><span class="attr">        json:</span> <span class="string">application/json</span></span><br></pre></td></tr></table></figure>
 <p>favor-path-extension 表示是否开启后缀匹配，media-types 表示后缀以何种方式进行解析，在这里需要注意一下一定是需要有对应的 HttpMessageConvert 才能解析，否则是会提示 <code>406 Could not find acceptable representation</code></p>
@@ -506,6 +522,15 @@
 
     <footer class="post-footer">
       
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Springboot/" rel="tag"># Springboot</a>
+          
+        </div>
+      
 
       
       
@@ -524,6 +549,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/04/10/talkabout-httpMessageConvert-2/" rel="prev" title="Spring ContentNegotiation（内容协商）之原理篇（二）">
+                Spring ContentNegotiation（内容协商）之原理篇（二） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -592,7 +621,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">152</span>
+                    <span class="site-state-item-count">153</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="简介在了解这部分之前，你需要知道 Spring 都是通过 DispatcherServlet 来处理和分发请求的，如果不知道的话也不会影响到本文的阅读 在开启内容协商之后，URL 肯定是会变的，例如之前是 a/b，开启后则变成为 a/b.json 或者 a/b.xml 那么 Spring 首先第一步就需要解决如何将这个 url 映射到正确的 Controller 上的呢？ HandlerMappi">
+<meta name="keywords" content="Springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring ContentNegotiation（内容协商）之原理篇（二）">
+<meta property="og:url" content="https://somersames.github.io/2021/04/10/talkabout-httpMessageConvert-2/index.html">
+<meta property="og:site_name" content="Somersames">
+<meta property="og:description" content="简介在了解这部分之前，你需要知道 Spring 都是通过 DispatcherServlet 来处理和分发请求的，如果不知道的话也不会影响到本文的阅读 在开启内容协商之后，URL 肯定是会变的，例如之前是 a/b，开启后则变成为 a/b.json 或者 a/b.xml 那么 Spring 首先第一步就需要解决如何将这个 url 映射到正确的 Controller 上的呢？ HandlerMappi">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/five_handle_mapping.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/simple-http-handle.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/getHandle.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/HandleMethod.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/lookupHandlerMethod.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/getMatchingCondition.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/getMatchingPattern.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/addMatchingMappings2.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/addMatchingMappings2.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/getMediaTypeKey.png">
+<meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/getMediaTypeKey_parameter.png">
+<meta property="og:updated_time" content="2021-04-14T16:48:14.699Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring ContentNegotiation（内容协商）之原理篇（二）">
+<meta name="twitter:description" content="简介在了解这部分之前，你需要知道 Spring 都是通过 DispatcherServlet 来处理和分发请求的，如果不知道的话也不会影响到本文的阅读 在开启内容协商之后，URL 肯定是会变的，例如之前是 a/b，开启后则变成为 a/b.json 或者 a/b.xml 那么 Spring 首先第一步就需要解决如何将这个 url 映射到正确的 Controller 上的呢？ HandlerMappi">
+<meta name="twitter:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/five_handle_mapping.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Somersames" type="application/atom+xml"/>
+
+
+
+  
+  
+  <link rel="canonical" href="https://somersames.github.io/2021/04/10/talkabout-httpMessageConvert-2/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Spring ContentNegotiation（内容协商）之原理篇（二） | Somersames</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Somersames</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://somersames.github.io/2021/04/10/talkabout-httpMessageConvert-2/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Somersames"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Somersames"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring ContentNegotiation（内容协商）之原理篇（二）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-10 23:31:38" itemprop="dateCreated datePublished" datetime="2021-04-10T23:31:38+08:00">2021-04-10</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-04-15 00:48:14" itemprop="dateModified" datetime="2021-04-15T00:48:14+08:00">2021-04-15</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Springboot/" itemprop="url" rel="index"><span itemprop="name">Springboot</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>在了解这部分之前，你需要知道 Spring 都是通过 DispatcherServlet 来处理和分发请求的，如果不知道的话也不会影响到本文的阅读</p>
+<p>在开启内容协商之后，URL 肯定是会变的，例如之前是 a/b，开启后则变成为 a/b.json 或者 a/b.xml</p>
+<p>那么 Spring 首先第一步就需要解决如何将这个 url 映射到正确的 Controller 上的呢？</p>
+<h2 id="HandlerMapping"><a href="#HandlerMapping" class="headerlink" title="HandlerMapping"></a>HandlerMapping</h2><p>在 Spring 5.X 中，目前只含有 5 种，分别如下<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/five_handle_mapping.png" alt=""><br>如果你没有做任何操作，那么用于处理 Controller 的请求就是来自于 <code>RequestMappingHandlerMapping</code>，如果你想把<code>/*/a，/a*</code> 映射到指定的 Controller，那么可以了解下 <code>SimpleUrlHandlerMapping</code>，当然这些都是后话了，与本文无关</p>
+<p>获取 <code>HandlerMapping</code> 最重要的一个原因是要拿到 <code>HandlerExecutionChain</code>，在 HandlerExecutionChain 里面有我们熟悉的拦截器以及处理请求的 Handle，<br>获取 Handle 后通过 getHandlerAdapter 来获取最终的 HandlerAdapter，通过 HandlerAdapter.handle(HttpServletRequest request, HttpServletResponse response, Object handler) 来处理请求</p>
+<p>具体的作用如图<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/simple-http-handle.png" alt=""></p>
+<h2 id="HandlerExecutionChain"><a href="#HandlerExecutionChain" class="headerlink" title="HandlerExecutionChain"></a>HandlerExecutionChain</h2><p>HandlerExecutionChain 内部没有很多的属性，主要都是拦截器相关，既然拦截器执行是在获取到 HandlerExecutionChain 之后执行的，那么匹配 Url 肯定是在这之前，所以只需要看 getHandler 就可以了</p>
+<h1 id="getHandler"><a href="#getHandler" class="headerlink" title="getHandler"></a>getHandler</h1><p>getHandler 是 HandlerMapping 接口的一个抽象方法，在 AbstractHandlerMapping 中被实现，主要功能是匹配该 Request 对应的 HandlerExecutionChain<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/getHandle.png" alt=""></p>
+<p>这里 getHandlerInternal 返回的是一个 HandlerMethod，打印出来如下：<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/HandleMethod.png" alt=""></p>
+<p>可以看到这里返回的其实就是对应的Controller 处理方法，那么 mapping 肯定就在这个方法内部，在这个方法里面有一个很重要的方法 lookupHandlerMethod，该方法就是最终进行匹配的地方</p>
+<h2 id="lookupHandlerMethod"><a href="#lookupHandlerMethod" class="headerlink" title="lookupHandlerMethod"></a>lookupHandlerMethod</h2><p><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/lookupHandlerMethod.png" alt=""><br>在进行下去会看到 AbstractHandlerMethodMapping 的 addMatchingMappings 方法，该方法就是会对所有该项目的所有的url进行依一一匹配<br>最终会调用到 getMatchingCondition 方法，而我们仅仅需要对 getMatchingCondition 关注即可，因为前面的判断并不会跟内容协商有关<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/getMatchingCondition.png" alt=""></p>
+<p>getMatchingCondition 最终会调用的 PatternsRequestCondition 的 getMatchingPattern 方法，这个方法也就是今天的核心了<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> PatternsRequestCondition <span class="title">getMatchingCondition</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.patterns.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    String lookupPath = <span class="keyword">this</span>.pathHelper.getLookupPathForRequest(request);</span><br><span class="line">    List&lt;String&gt; matches = getMatchingPatterns(lookupPath);</span><br><span class="line">    <span class="comment">// 省略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>matches 里面存储的事所有匹配到的 url，这个url 并不是原始的，而是匹配后的，例如 <code>a/b/c.*</code> </p>
+<p>对于内容协商，则只需要关心 <code>this.patternsCondition.getMatchingCondition(request)</code> 即可，而该方法最终会进入 <code>PatternsRequestCondition#getMatchingPattern</code><br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/getMatchingPattern.png" alt=""></p>
+<p>如果你开启的是后缀匹配模式，那么 <code>this.useSuffixPatternMatch</code> 就必须是true，这也是上面说的 tips，上图红框内代码会判断下，如果是后缀匹配，那么 url 里面肯定是会有一个 . 的，所以此时用 . 进行区分，也就是如果你的 url 是 <code>a/b/c</code>，请求的url 是 <code>a/b/c.json</code>，此时就会通过 <code>a/b/c.*</code> 和 <code>a/b/c.json</code> 进行匹配，可想而知，肯定可以匹配到的，所以此时就可以找到正确的处理方法了，也就是会返回 <code>a/b/c.*</code> 作为匹配到的 url</p>
+<p>那么既然匹配到 url 是 a/b/c.*，那么在 controller 中的 url 又是如何映射过去的呢？<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/addMatchingMappings2.png" alt=""></p>
+<p>答案是在这个 for 循环里面，在进行遍历的时候，那个 mapping 就是原始的 controller 中的 url 方法，所以 spring 才可以通过这个定位到是通过哪个方法来处理该请求</p>
+<p>当获取到 HandlerMethod 之后，则 通过 getHandlerExecutionChain 来获取所有的拦截器，并且进行处理，如果拦截器返回 false，则直接 return，否则通过 HandlerAdapter 来进行处理请求</p>
+<h1 id="返回"><a href="#返回" class="headerlink" title="返回"></a>返回</h1><p>既然已经知道了调用的方法，那么最后就是通过 url 的后缀来匹配对应的 HandlerMethodReturnValueHandler</p>
+<h2 id="HandlerMethodReturnValueHandler"><a href="#HandlerMethodReturnValueHandler" class="headerlink" title="HandlerMethodReturnValueHandler"></a>HandlerMethodReturnValueHandler</h2><p>这是一个抽象接口，里面只有两个抽象放啊，分别如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerMethodReturnValueHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">supportsReturnType</span><span class="params">(MethodParameter returnType)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">handleReturnValue</span><span class="params">(@Nullable Object returnValue, MethodParameter returnType,</span></span></span><br><span class="line"><span class="function"><span class="params">			ModelAndViewContainer mavContainer, NativeWebRequest webRequest)</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>supportsReturnType 判断该 Handle 能否处理该请求，handleReturnValue 则是真正处理该请求返回值的方法</p>
+<h3 id="RequestResponseBodyMethodProcessor"><a href="#RequestResponseBodyMethodProcessor" class="headerlink" title="RequestResponseBodyMethodProcessor"></a>RequestResponseBodyMethodProcessor</h3><p>这个类是专门用来处理用 ResponseBody 注解修饰的方法，其 supportsReturnType 如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supportsReturnType</span><span class="params">(MethodParameter returnType)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (AnnotatedElementUtils.hasAnnotation(returnType.getContainingClass(), ResponseBody.class) ||</span><br><span class="line">            returnType.hasMethodAnnotation(ResponseBody.class));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="writeWithMessageConverters"><a href="#writeWithMessageConverters" class="headerlink" title="writeWithMessageConverters"></a>writeWithMessageConverters</h2><p>该方法位于 AbstractMessageConverterMethodProcessor，关键代码如图：<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/addMatchingMappings2.png" alt=""></p>
+<p>getAcceptableMediaTypes 就是来判断该 url 适合用什么格式来解析的关键代码，具体代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> List&lt;MediaType&gt; <span class="title">getAcceptableMediaTypes</span><span class="params">(HttpServletRequest request)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> HttpMediaTypeNotAcceptableException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.contentNegotiationManager.resolveMediaTypes(<span class="keyword">new</span> ServletWebRequest(request));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>继续往下跟，到了 getMediaTypeKey 也就最后不远了，getMediaTypeKey 是 PathExtensionContentNegotiationStrategy 下的一个方法，主要是获取 url 里面所支持的 MediaType，<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/getMediaTypeKey.png" alt=""></p>
+<p>通过 <code>UriUtils.extractFileExtension(path)</code> 是可以拿到 /a/b/c.json 后面的 json，具体代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">extractFileExtension</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> end = path.indexOf(<span class="string">'?'</span>);</span><br><span class="line">    <span class="keyword">int</span> fragmentIndex = path.indexOf(<span class="string">'#'</span>);</span><br><span class="line">    <span class="keyword">if</span> (fragmentIndex != -<span class="number">1</span> &amp;&amp; (end == -<span class="number">1</span> || fragmentIndex &lt; end)) &#123;</span><br><span class="line">        end = fragmentIndex;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (end == -<span class="number">1</span>) &#123;</span><br><span class="line">        end = path.length();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> begin = path.lastIndexOf(<span class="string">'/'</span>, end) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> paramIndex = path.indexOf(<span class="string">';'</span>, begin);</span><br><span class="line">    end = (paramIndex != -<span class="number">1</span> &amp;&amp; paramIndex &lt; end ? paramIndex : end);</span><br><span class="line">    <span class="keyword">int</span> extIndex = path.lastIndexOf(<span class="string">'.'</span>, end);</span><br><span class="line">    <span class="keyword">if</span> (extIndex != -<span class="number">1</span> &amp;&amp; extIndex &gt; begin) &#123;</span><br><span class="line">        <span class="keyword">return</span> path.substring(extIndex + <span class="number">1</span>, end);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="favorParameter-format模式"><a href="#favorParameter-format模式" class="headerlink" title="favorParameter format模式"></a>favorParameter format模式</h1><p>这个模式在处理请求的部分大同小异，主要是在解析返回的 MediaTypeKey 上有区别<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/talkaboutHttpMeesageConvert2/getMediaTypeKey_parameter.png" alt=""><br>直接解析指定的参数，拿到对应的格式，一切就都结束了</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Springboot/" rel="tag"># Springboot</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/07/talk-about-httpMessageConvert/" rel="next" title="Spring ContentNegotiation（内容协商）之使用篇（一）">
+                <i class="fa fa-chevron-left"></i> Spring ContentNegotiation（内容协商）之使用篇（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Somersames</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">153</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HandlerMapping"><span class="nav-number">1.1.</span> <span class="nav-text">HandlerMapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HandlerExecutionChain"><span class="nav-number">1.2.</span> <span class="nav-text">HandlerExecutionChain</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#getHandler"><span class="nav-number">2.</span> <span class="nav-text">getHandler</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lookupHandlerMethod"><span class="nav-number">2.1.</span> <span class="nav-text">lookupHandlerMethod</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#返回"><span class="nav-number">3.</span> <span class="nav-text">返回</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HandlerMethodReturnValueHandler"><span class="nav-number">3.1.</span> <span class="nav-text">HandlerMethodReturnValueHandler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RequestResponseBodyMethodProcessor"><span class="nav-number">3.1.1.</span> <span class="nav-text">RequestResponseBodyMethodProcessor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#writeWithMessageConverters"><span class="nav-number">3.2.</span> <span class="nav-text">writeWithMessageConverters</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#favorParameter-format模式"><span class="nav-number">4.</span> <span class="nav-text">favorParameter format模式</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Somersames</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
