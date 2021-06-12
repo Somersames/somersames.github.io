@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="LockSupport 是一个用于线程阻塞或者唤醒的类，位于 rt.jar，主要是通过 Unsafe 类来进行操作 该类的方法都是静态方法，最常使用的方法是 void park(Object blocker) 和 void unpark(Thread thread) 是AQS操作的基础类，阻塞线程的时候不需要在同步块内，比较方便 下面主要介绍这两种方法： void park(Object bloc">
+  <meta name="description" content="LockSupport 是一个用于线程阻塞或者唤醒的类，位于 rt.jar，主要是通过 Unsafe 类来进行操作 该类的方法都是静态方法，最常使用的方法是 void park(Object blocker) 和 void unpark(Thread thread) 是AQS操作的基础类，阻塞线程的时候不需要加锁，比较方便 下面主要介绍这两种方法： void park(Object blocker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LockSupport的一些琐事">
 <meta property="og:url" content="https://somersames.github.io/2021/05/16/LockSupport的一些琐事/index.html">
 <meta property="og:site_name" content="Somersames">
-<meta property="og:description" content="LockSupport 是一个用于线程阻塞或者唤醒的类，位于 rt.jar，主要是通过 Unsafe 类来进行操作 该类的方法都是静态方法，最常使用的方法是 void park(Object blocker) 和 void unpark(Thread thread) 是AQS操作的基础类，阻塞线程的时候不需要在同步块内，比较方便 下面主要介绍这两种方法： void park(Object bloc">
+<meta property="og:description" content="LockSupport 是一个用于线程阻塞或者唤醒的类，位于 rt.jar，主要是通过 Unsafe 类来进行操作 该类的方法都是静态方法，最常使用的方法是 void park(Object blocker) 和 void unpark(Thread thread) 是AQS操作的基础类，阻塞线程的时候不需要加锁，比较方便 下面主要介绍这两种方法： void park(Object blocker">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/LockSupport_something/Jstack_Thread.png">
-<meta property="og:updated_time" content="2021-05-17T16:14:15.738Z">
+<meta property="og:updated_time" content="2021-05-17T16:31:18.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LockSupport的一些琐事">
-<meta name="twitter:description" content="LockSupport 是一个用于线程阻塞或者唤醒的类，位于 rt.jar，主要是通过 Unsafe 类来进行操作 该类的方法都是静态方法，最常使用的方法是 void park(Object blocker) 和 void unpark(Thread thread) 是AQS操作的基础类，阻塞线程的时候不需要在同步块内，比较方便 下面主要介绍这两种方法： void park(Object bloc">
+<meta name="twitter:description" content="LockSupport 是一个用于线程阻塞或者唤醒的类，位于 rt.jar，主要是通过 Unsafe 类来进行操作 该类的方法都是静态方法，最常使用的方法是 void park(Object blocker) 和 void unpark(Thread thread) 是AQS操作的基础类，阻塞线程的时候不需要加锁，比较方便 下面主要介绍这两种方法： void park(Object blocker">
 <meta name="twitter:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/LockSupport_something/Jstack_Thread.png">
 
 
@@ -410,7 +410,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-05-18 00:14:15" itemprop="dateModified" datetime="2021-05-18T00:14:15+08:00">2021-05-18</time>
+                <time title="修改时间：2021-05-18 00:31:18" itemprop="dateModified" datetime="2021-05-18T00:31:18+08:00">2021-05-18</time>
               </span>
             
           
@@ -449,10 +449,10 @@
       
         <p>LockSupport 是一个用于线程阻塞或者唤醒的类，位于 rt.jar，主要是通过 Unsafe 类来进行操作</p>
 <p>该类的方法都是静态方法，最常使用的方法是 void park(Object blocker) 和 void unpark(Thread thread)</p>
-<p>是AQS操作的基础类，阻塞线程的时候不需要在同步块内，比较方便</p>
+<p>是AQS操作的基础类，阻塞线程的时候不需要加锁，比较方便</p>
 <p>下面主要介绍这两种方法：</p>
 <h2 id="void-park-Object-blocker"><a href="#void-park-Object-blocker" class="headerlink" title="void park(Object blocker)"></a>void park(Object blocker)</h2><p>这个方法和 void park() 类似，最主要的区别在于 void park(Object blocker) 设置了一个 blocker，这个参数是一个 Object，一般是当前对象放进去，尤其是需要通过 jstack 查看线程阻塞的原因，此时会打印block<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/LockSupport_something/Jstack_Thread.png" alt=""></p>
-<h2 id="void-unpark-Thread-thread"><a href="#void-unpark-Thread-thread" class="headerlink" title="void unpark(Thread thread)"></a>void unpark(Thread thread)</h2><p>该方法会将一个处于阻塞状态的线程唤醒，可以将许可理解为一个信号量<br>如果当前的没有信号量，则 unpark 会将设置一个，如果有一个信号量，则 unpark 也不会进行任何操作，因为LockSupport 所允许的信号量仅允许一个</p>
+<h2 id="void-unpark-Thread-thread"><a href="#void-unpark-Thread-thread" class="headerlink" title="void unpark(Thread thread)"></a>void unpark(Thread thread)</h2><p>该方法会将一个处于阻塞状态的线程唤醒，可以将「许可」理解为一个信号量<br>如果当前的没有信号量，则 unpark 会将设置一个，如果有一个信号量，则 unpark 也不会进行任何操作，因为LockSupport 所允许的信号量仅允许一个</p>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>该类有一个特点就是，阻塞线程不需要在同步代码块里面</p>
 <blockquote>
 <p>如果是 Object.wait()，需要在 synchronized 同步块里面的</p>
@@ -503,6 +503,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/05/30/difference-between-synchronized-and-volatile/" rel="prev" title="浅谈 synchronized 和 volatile">
+                浅谈 synchronized 和 volatile <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -571,7 +575,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">155</span>
+                    <span class="site-state-item-count">156</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
