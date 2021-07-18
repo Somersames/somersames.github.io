@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/Redis%E4%B8%ADziplist%E7%9A%84%E5%AE%9E%E7%8E%B0/string.png">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/Redis%E4%B8%ADziplist%E7%9A%84%E5%AE%9E%E7%8E%B0/clipboard_20210715_011629.png">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/Redis%E4%B8%ADziplist%E7%9A%84%E5%AE%9E%E7%8E%B0/int.png">
-<meta property="og:updated_time" content="2021-07-16T01:12:20.600Z">
+<meta property="og:updated_time" content="2021-07-18T17:15:04.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis中ziplist的实现(一)">
 <meta name="twitter:description" content="ziplist 是一个双向链表，但是不同于熟知的利用头指针和尾指针所形成的双向链表，ziplist 而是采用了一个特殊的实现 区别普通的双向链表因为在每一个节点上都含有一个头节点和尾节点，所以在遍历的时候可以依次沿着每一个节点进行递归，而且在新增或者删除的时候，直接移动指针即可，并且每一个节点在内存中并不要求是连续的，只需要指针指向对应节点的内存地址即可。 但是 redis 使用的是内存，在内存满">
@@ -412,7 +412,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-07-16 09:12:20" itemprop="dateModified" datetime="2021-07-16T09:12:20+08:00">2021-07-16</time>
+                <time title="修改时间：2021-07-19 01:15:04" itemprop="dateModified" datetime="2021-07-19T01:15:04+08:00">2021-07-19</time>
               </span>
             
           
@@ -481,13 +481,7 @@
 <h3 id="int"><a href="#int" class="headerlink" title="int"></a>int</h3><p>如果存储的内容是 int 类型，那么 ziplist 的 encoding 则会通过另一种方式进行存储<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/Redis%E4%B8%ADziplist%E7%9A%84%E5%AE%9E%E7%8E%B0/int.png" width="500" height="256" style="margin: 0 auto;"><br>其中 encoding 有 5 中类型，分别对应的是 int 的几个大小</p>
 <p>这里还有一个小细节：<br>因为 ff(11111111) 这种 encoding 表示的是尾节点，但是在 f0(11110000) 至 fe(11111110) 之间还有 4 个 bit 没有被使用，分别是 0001 至 1101，也就是 1 到 13，于是 redis 的作者就想，能不能把这部分的空间利用起来呢？</p>
 <p>所以如果 int 的值处于 1-13 之间，那么此时直接和 encoding 存储在一起，避免额外开辟一个字节的空间来存储数据，减少内存的使用</p>
-<!-- 
-### 如果在中间新增
-因为 ziplist 是一整块的内存，因此每一次新增数据的时候都需要重新分配内存，此时 redis 会通过 `ziplistResize` 来进行重新分配内存
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistResize</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    zl = zrealloc(zl,len);</span><br><span class="line">    ZIPLIST_BYTES(zl) = intrev32ifbe(len);</span><br><span class="line">    zl[len<span class="number">-1</span>] = ZIP_END;</span><br><span class="line">    <span class="keyword">return</span> zl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而这里面最重要的一个函数就是 <code>zrealloc</code>，这个函数就是将原有内存重新分配，新的内存块大小为 len，并且会调用 <code>update_zmalloc_stat_free</code> 释放掉原有的使用内存 –&gt;</p>
--->
       
     </div>
 
@@ -526,6 +520,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/18/Redis中ziplist的实现二/" rel="prev" title="Redis中ziplist的实现二">
+                Redis中ziplist的实现二 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -594,7 +592,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">158</span>
+                    <span class="site-state-item-count">159</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

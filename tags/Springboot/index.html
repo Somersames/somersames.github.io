@@ -96,7 +96,7 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="Somersames">
-<meta property="og:url" content="https://somersames.github.io/tags/springboot/index.html">
+<meta property="og:url" content="https://somersames.github.io/tags/SpringBoot/index.html">
 <meta property="og:site_name" content="Somersames">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -110,7 +110,7 @@
 
   
   
-  <link rel="canonical" href="https://somersames.github.io/tags/springboot/"/>
+  <link rel="canonical" href="https://somersames.github.io/tags/SpringBoot/"/>
 
 
 
@@ -120,7 +120,7 @@
   };
 </script>
 
-  <title>标签: springboot | Somersames</title>
+  <title>标签: SpringBoot | Somersames</title>
   
 
 
@@ -356,7 +356,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>springboot<small>标签</small>
+        <h1>SpringBoot<small>标签</small>
         </h1>
       </div>
 
@@ -368,9 +368,9 @@
 
       <h2 class="post-title">
         
-          <a class="post-title-link" href="/2018/03/05/记一次springboot-mybatis找不到dao层的错误/" itemprop="url">
+          <a class="post-title-link" href="/2020/04/02/SpringBoot中异步线程的处理/" itemprop="url">
             
-              <span itemprop="name">记一次springboot-mybatis找不到dao层的错误</span>
+              <span itemprop="name">SpringBoot中异步线程的处理</span>
             
           </a>
         
@@ -378,9 +378,93 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-05T20:23:02+08:00"
-              content="2018-03-05">
-          03-05
+              datetime="2020-04-02T23:46:30+08:00"
+              content="2020-04-02">
+          04-02
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2020/03/19/springboot多数据源-sqlSessionFactory/" itemprop="url">
+            
+              <span itemprop="name">springboot多数据源-sqlSessionFactory</span>
+            
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-03-19T19:57:04+08:00"
+              content="2020-03-19">
+          03-19
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2020/01/05/SpringBoot2-x是怎样只初始化LettuceConnectionFactory的呢/" itemprop="url">
+            
+              <span itemprop="name">SpringBoot2.x是怎样只初始化LettuceConnectionFactory的呢</span>
+            
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-01-05T15:22:19+08:00"
+              content="2020-01-05">
+          01-05
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2018/09/25/一次SpringBoot初始化引起的思考/" itemprop="url">
+            
+              <span itemprop="name">一次SpringBoot初始化引起的思考</span>
+            
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-09-25T23:03:38+08:00"
+              content="2018-09-25">
+          09-25
         </time>
       </div>
 
@@ -437,7 +521,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">158</span>
+                    <span class="site-state-item-count">159</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1125,101 +1209,6 @@
             } else if (resultItems.length === 0) {
               resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
             } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
               resultItems.sort(function (resultLeft, resultRight) {
                 if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
                   return resultRight.searchTextCount - resultLeft.searchTextCount;
