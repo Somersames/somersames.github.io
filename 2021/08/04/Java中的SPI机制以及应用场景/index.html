@@ -95,6 +95,7 @@
 
 
   <meta name="description" content="SPI 全称是 Service Provider Interface，是 JDK1.5 新增的一个功能，允许不同的服务提供者去实现某个规定的接口，而且将具体的实现完全提供给使用方，允许使用方按需加载服务提供方的一些功能。 前言提到 SPI，就不得不提下 API，以 dubbo 为例，服务提供方对外提供一系列 API，而使用方是不用关心服务提供方是如何实现具体的业务逻辑，只需要通过 RPC 调用远程">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中的SPI机制以及应用场景">
 <meta property="og:url" content="https://somersames.github.io/2021/08/04/Java中的SPI机制以及应用场景/index.html">
@@ -105,7 +106,7 @@
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/Java%E4%B8%AD%E7%9A%84SPI%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/spi.png">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/Java%E4%B8%AD%E7%9A%84SPI%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/demo.png">
 <meta property="og:image" content="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/Java%E4%B8%AD%E7%9A%84SPI%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/maven_nexus.png">
-<meta property="og:updated_time" content="2021-08-05T01:41:02.393Z">
+<meta property="og:updated_time" content="2021-08-05T17:06:16.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的SPI机制以及应用场景">
 <meta name="twitter:description" content="SPI 全称是 Service Provider Interface，是 JDK1.5 新增的一个功能，允许不同的服务提供者去实现某个规定的接口，而且将具体的实现完全提供给使用方，允许使用方按需加载服务提供方的一些功能。 前言提到 SPI，就不得不提下 API，以 dubbo 为例，服务提供方对外提供一系列 API，而使用方是不用关心服务提供方是如何实现具体的业务逻辑，只需要通过 RPC 调用远程">
@@ -413,11 +414,26 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-08-05 09:41:02" itemprop="dateModified" datetime="2021-08-05T09:41:02+08:00">2021-08-05</time>
+                <time title="修改时间：2021-08-06 01:06:16" itemprop="dateModified" datetime="2021-08-06T01:06:16+08:00">2021-08-06</time>
               </span>
             
           
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -473,6 +489,7 @@
 <h3 id="META-INF-services"><a href="#META-INF-services" class="headerlink" title="META-INF/services"></a>META-INF/services</h3><p>JDK 中规定，只有在这个文件夹中的 SPI 才会被加载，因为 JDK 已经将该路径硬编码到代码中了，而文件的命令也很有规范。<br><img src="https://szhtc-1252780558.cos.ap-shanghai.myqcloud.com/%E6%96%87%E7%AB%A0/Java%E4%B8%AD%E7%9A%84SPI%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/maven_nexus.png" alt=""></p>
 <p>文件名称必须是接口的全路径名称（大小写也必须一致）<br>而文件里面的内容就是实现该接口的类的全路径名称，例如 <code>xyz.somersames.Buy</code> 这个里面的内容就是<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xyz.somersames.AliPayBuy</span><br></pre></td></tr></table></figure></p>
 <h1 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h1><p>通过 SPI 机制加载的类是会破坏双亲委派机制的，因为按照双亲委派的机制，当 classLoader 加载某一个类的时候是一层一层往上递增的，然后再逐级往下，但是 SPI 机制是通过 thread.contextClassLoader 直接加载了具体的实现类。<br>虽然说原生的 classLoader 是按照双亲委派机制在加载类，但是 <code>thread.contextClassLoader</code> 这里由于极大的灵活性可能会导致被用户的自定义 classLoader 覆盖，而如果用户自定义的 classLoader 不按照规范来，那么就直接破坏了双亲委派机制了</p>
+<p>其二，因为 JDK 的 SPI 接口一般是位于 rt.jar 中，按照双亲委派机制，应该由 BootstrapClassLoader 加载，但是其实现类却是位于 classPath，由 AppClassLoader 加载，所以这也算是破坏的一种</p>
 
       
     </div>
@@ -493,6 +510,15 @@
     
 
     <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
       
 
       
