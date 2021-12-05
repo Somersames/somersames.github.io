@@ -163,7 +163,7 @@ search:
 comment:
     type: gitalk
     client_id: 25556176038697859b69
-    client_secret: b7e79c8e34f2015163aac5432f917ef4efc071aa
+    client_secret: d524f2d38ef1b4fde8aabcf51c57dc5cb20381a5
     repo: somersames.github.io
     owner: somersames
     admin: [somersames]
