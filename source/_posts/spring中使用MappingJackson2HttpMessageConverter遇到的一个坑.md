@@ -1,8 +1,8 @@
 ---
 title: spring中使用MappingJackson2HttpMessageConverter遇到的一个坑
 date: 2018-04-27 21:47:18
-tags: [web后端,spring]
-categories: Spring
+tags: [web后端,Spring]
+categories: [Java,Spring]
 ---
 今天遇到的一个问题就是在Spring中如果继承 `WebMvcConfigurerAdapter` 然后实现 `configureMessageConverters` 方法来实现一个 Json 的转换的时候，此时会出现一个情况就是：
     如果在Controller里面的那个参数是String的话就会一直提示一个错误 `org.springframework.http.converter.HttpMessageNotReadableException","message":"JSON parse error: Can not deserialize instance of java.lang.String out of START_OBJECT token; nested exception is com.fasterxml.jackson.databind.JsonMappingException: Can not deserialize instance of java.lang.String out of START_OBJECT token\n at [Source: java.io.PushbackInputStream@35b22c23; line: 1, column: 1]","path":"/tetsjson"}`

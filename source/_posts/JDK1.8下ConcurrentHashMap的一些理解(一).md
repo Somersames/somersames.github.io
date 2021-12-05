@@ -1,8 +1,8 @@
 ---
 title: JDK1.8下ConcurrentHashMap的一些理解(一)
 date: 2019-05-13 23:26:02
-tags: Java
-categories: java
+tags: [Java]
+categories: [Java,JDK]
 ---
 在JDK1.8里面，`ConcurrentHashMap`在put方法里面已经将分段锁移除了，转而是CAS锁和synchronized
 

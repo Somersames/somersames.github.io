@@ -1,7 +1,7 @@
 ---
 title: JDK1.7中的ConcurrentHashMap实现细节(二)
 date: 2019-09-15 20:35:02
-tags: Java
+tags: [Java]
 categories: Java
 ---
 ## 简介

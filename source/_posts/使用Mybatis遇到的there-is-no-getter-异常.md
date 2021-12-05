@@ -1,8 +1,8 @@
 ---
 title: 使用Mybatis遇到的there is no getter 异常
 date: 2018-09-10 23:03:50
-tags: [mybatis]
-categories: Mybatis
+tags: [MyBatis]
+categories: [第三方组件,MyBatis]
 ---
 在使用mybatis的时候有时候会遇到一个问题就是明明参数是正确的，但是还是会提示`There is no getter XXX`这个异常，但是一般的解决办法是在mapper里面添加`@Param`注解来完成是别的，那么为什么会遇到这个问题呢？
 

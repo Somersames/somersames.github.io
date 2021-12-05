@@ -1,8 +1,8 @@
 ---
 title: 在Angular中使用Bootstrap
 date: 2018-05-29 19:28:03
-tags: [web前端,angular]
-categories: Angular
+tags: [web前端,Angular]
+categories: [web前端,Angular]
 ---
 在去年的时候短暂的接触了大概一个星期的 Angular 之后就再也没碰过了，今天突然想重新捡起 Angular 的相关知识，并且想将 Angular 结合 Bootstrap 一起使用。所以正好记录下一起结合使用的步骤。
 

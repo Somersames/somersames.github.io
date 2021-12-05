@@ -1,8 +1,8 @@
 ---
-title: spring cloud初步配置之起步
+title: SpringCloud初步配置之起步
 date: 2018-04-18 23:58:34
-tags: [web后端,springcloud]
-categories: Spring
+tags: [web后端,SpringCloud]
+categories: [Java,SpringCloud]
 ---
 spring cloud是一个微服务治理框架，主要解决的是以前单应用过于臃肿的一些难点，在这里记录下初次使用springcloud的一些过程
 

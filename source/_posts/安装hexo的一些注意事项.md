@@ -1,8 +1,8 @@
 ---
 title: 安装hexo的一些注意事项
 date: 2017-11-06 22:09:05
-tags: 个人记录
-categories : hexo相关
+tags: [个人记录]
+categories : [Hexo]
 ---
 
 # 安装步骤：

@@ -1,8 +1,8 @@
 ---
 title: 关于Unicode和其他的字符集以及Spring乱码处理
 date: 2018-03-26 19:49:18
-tags: spring
-categories: Java
+tags: [Java]
+categories: [Java,Spring]
 ---
 
 ## Spring出现乱码的解决办法：

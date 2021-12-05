@@ -1,8 +1,8 @@
 ---
 title: 关于ArrayList的所见所想
 date: 2017-11-07 21:46:25
-tags: java集合
-categories: Java
+tags: [Java]
+categories: [Java,集合]
 ---
 
 # 关于ArrrayList扩容：

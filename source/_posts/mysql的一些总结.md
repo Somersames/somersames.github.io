@@ -1,8 +1,8 @@
 ---
 title: mysql的一些总结
 date: 2018-03-29 22:03:32
-tags: mysql
-categories: 数据库
+tags: [MySql]
+categories: [数据库,MySql]
 ---
 ## 前言
 今天突然有一个写sql的机会，但是是手写，不像之前那样可以在数据库上做测试。这突然让我感觉有的语法有点生疏了，所以乘着这个机会来做一个全部的梳理。

@@ -1,7 +1,7 @@
 ---
 title: 代理模式之JDK为什么需要实现接口(下篇)
 date: 2020-04-21 01:00:44
-tags: 动态代理
+tags: [Java]
 categories: Java
 ---
 

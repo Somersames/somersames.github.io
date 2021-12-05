@@ -1,8 +1,8 @@
 ---
 title: 将Jackson替换成Fastjosn
 date: 2018-09-04 00:21:22
-tags: [java,Spring]
-categories: Spring
+tags: [Java,Spring]
+categories: [Java,Spring]
 ---
 
 记得有一次的面试是。如何在Spring中将`JackSon` 替换为 `FastJson`，emmmm...当时的回答是只需要替换 pom.xml，然后在使用的时候引入FastJosn就行了，但是在当时显然没有理解到面试官的意图，既然面试官强调的是如何替换，那么修改`pom.xml`很显然不是面试官所想要的答案，那还有什么答案呢？

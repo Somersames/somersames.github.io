@@ -1,8 +1,8 @@
 ---
-title: LeetCode的一道字符串题目：最长不重复的子字符串长度
+title: leetcode的一道字符串题目：最长不重复的子字符串长度
 date: 2018-03-14 20:58:32
-tags: 字符串相关
-categories: Leetcode
+tags: [算法]
+categories: [算法,leetcode]
 ---
 
 # 找出最长的不重复的子字符串

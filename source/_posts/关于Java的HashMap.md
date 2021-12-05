@@ -1,10 +1,8 @@
 ---
 title: 关于Java的HashMap
 date: 2017-11-09 22:40:38
-tags: 
-- java
-- 集合
-categories: Java
+tags: [Java]
+categories: [Java,集合]
 ---
 # Map接口：
 1. 在map接口中的存在一个主接口：`public interface Map` 和一个内部接口：`interface Entry`

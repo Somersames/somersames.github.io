@@ -1,8 +1,8 @@
 ---
 title: Vue中nextTick的使用
 date: 2019-05-20 23:39:42
-tags: Vue
-categories: Vue
+tags: [Vue]
+categories: [web前端,Vue]
 ---
 
 这段时间一直在负责一个前后端项目，前端是`Vue`+`ElemeUI`，由于自己之前只是会简单的使用 Vue 的一些初级命令，自然只能慢慢的踩坑，然后再出坑....。例如`数组无法触发Vue的视图更新`

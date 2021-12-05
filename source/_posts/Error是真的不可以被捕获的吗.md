@@ -2,7 +2,7 @@
 title: Error是真的不可以被捕获的吗?
 date: 2018-05-25 16:06:59
 tags: [Java]
-categories: Java
+categories: [Java,JDK]
 ---
 在刚接触Java的时候经常听到的一句话便是在 Java 中，Exception 是可以捕获的，Error 是不可以捕获的。但是在随着学习的深入，会发现有些观点需要重新认识下了。
 Throwable 这个类是自 JDK1.0 开始就存在于 Java 的语言之中。

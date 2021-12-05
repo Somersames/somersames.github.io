@@ -1,8 +1,8 @@
 ---
 title: leetcode上一道求出数组前三大的数字
 date: 2018-07-25 00:17:05
-tags: [Leetcode,算法]
-categories: Leetcode
+tags: [leetcode,算法]
+categories: [算法,leetcode]
 ---
 
 题目如下:

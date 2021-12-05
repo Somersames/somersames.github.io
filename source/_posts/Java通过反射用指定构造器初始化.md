@@ -1,7 +1,7 @@
 ---
 title: Java通过反射用指定构造器初始化
 date: 2018-03-12 14:02:50
-tags: java高级特性
+tags: [Java]
 categories: Java
 ---
 # Java通过反射用指定构造器初始化

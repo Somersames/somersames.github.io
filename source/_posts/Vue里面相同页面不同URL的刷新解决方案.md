@@ -2,7 +2,7 @@
 title: Vue里面相同页面不同URL的刷新解决方案
 date: 2019-07-24 00:09:58
 tags: [Vue]
-categories: Vue
+categories: [web前端,Vue]
 ---
 随着项目的收尾，使用`Vue`也有大概两个月时间了，在这期间也才遇到过了不少的问题，今天就来说下 `Vue` 中URL不同但是页面相同的解决办法。
 

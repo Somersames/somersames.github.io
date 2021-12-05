@@ -1,7 +1,7 @@
 ---
 title: pandas的transform和apply
 date: 2017-12-10 16:22:20
-tags:
+tags: [pandas]
 ---
 
 # q区别

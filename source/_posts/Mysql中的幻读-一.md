@@ -1,8 +1,8 @@
 ---
-title: Mysql中的幻读(一)
+title: MySql中的幻读(一)
 date: 2019-08-18 20:41:54
-tags: [Mysql]
-categories: Mysql
+tags: [MySql]
+categories: [数据库,MySql]
 ---
 ## 什么是幻读
 

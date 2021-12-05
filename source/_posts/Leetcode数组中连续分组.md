@@ -2,7 +2,7 @@
 title: Leetcode数组中连续分组
 date: 2019-09-08 23:19:58
 tags: [leetcode]
-categories: 算法
+categories: [算法,leetcode]
 ---
 在Leetcode上有一道题目，如下：
 > In a deck of cards, each card has an integer written on it.

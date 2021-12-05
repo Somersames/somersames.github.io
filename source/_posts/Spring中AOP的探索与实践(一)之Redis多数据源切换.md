@@ -2,7 +2,7 @@
 title: Spring中AOP的探索与实践(一)之Redis多数据源切换
 date: 2019-03-12 00:16:00
 tags: [Springboot,Redis]
-categories: Springboot
+categories: [Java,SpringBoot]
 ---
 一般在项目的使用过程中，有时候为了减轻数据库的压力，从而将一部分数据缓存至Redis，但是随着业务量的增多。我们所需要的Redis服务器也会越来越多，就算不需要多个Redis数据源，那么在一个redis里面，切换不同的DB也是很麻烦的一件事情。
 

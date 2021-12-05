@@ -2,7 +2,7 @@
 title: 在Spring中全局处理异常
 date: 2019-01-10 00:21:48
 tags: [Spring]
-categories: Spring
+categories: [Java,Spring]
 ---
 随着业务的发展，在每一个业务模块里面都可能会出现一些自定义的通用异常，例如·`验证失败`，`权限不足`等等 ，这些自定义的异常很可能会被所有模块公用，在代码里面，最常见的一种写法是在每一个方法里面进行捕获，然后在`Controller`里面进行catch，最后进行相应处理
 

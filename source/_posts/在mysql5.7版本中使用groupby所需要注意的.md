@@ -1,8 +1,8 @@
 ---
 title: 在mysql5.7版本中使用groupby所需要注意的
 date: 2018-03-25 12:37:13
-tags: mysql
-categories: 数据库
+tags: [MySql]
+categories: [数据库,MySql]
 ---
 
 ## 什么是ONLY_FULL_GROUP_BY 模式

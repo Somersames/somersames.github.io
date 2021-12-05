@@ -2,7 +2,7 @@
 title: Springboot自定义@EnableXX注解
 date: 2020-05-26 00:05:16
 tags: [Springboot]
-categories: Springboot
+categories: [Java,Springboot]
 ---
 在SpringBoot中，经常可以看到许多以 `@Enable` 开头的注解，例如：`@EnableAutoConfiguration`，`@EnableAsync`......，那么我们是否可以自己定义一个注解呢？
 

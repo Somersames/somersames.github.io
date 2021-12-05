@@ -1,8 +1,8 @@
 ---
 title: 在Mysql中使用变量进行复杂的查询(一)
 date: 2019-02-27 00:06:07
-tags: [Mysql]
-categories: Mysql
+tags: [mysql]
+categories: [数据库,MySql]
 ---
 > 注意，此文章使用的Mysql变量均是用户变量
 

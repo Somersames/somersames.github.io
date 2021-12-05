@@ -1,8 +1,8 @@
 ---
 title: 记一次sql和时间段查询有关的语句
 date: 2018-03-23 23:11:30
-tags: mysql时间相关
-categories: 数据库
+tags: [MySql]
+categories: [数据库,MySql]
 ---
 ## 前言
 由于自己有点需求需要在mysql中按照时间段进行查询，而自己又对这些不太了解，所以趁着这次机会将mysql和时间段相关的查询语句做一个记录：

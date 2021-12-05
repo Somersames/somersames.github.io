@@ -1,8 +1,8 @@
 ---
 title: 对Java的List转Array的源码一点思考
 date: 2018-04-07 19:42:48
-tags: [java基础]
-categories: Java
+tags: [Java]
+categories: [Java,集合]
 ---
 在Java里面，List转为Array是调用的Java的一个Arrays.copyOf()这个方法，查看了下源代码：
 ```java

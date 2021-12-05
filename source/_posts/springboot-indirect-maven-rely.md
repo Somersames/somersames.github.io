@@ -2,7 +2,7 @@
 title: Springboot的maven间接依赖
 date: 2020-05-19 00:21:53
 tags: [maven]
-categories: Springboot
+categories: [Java,SpringBoot]
 ---
 在项目中经常使用 `maven` 来管理项目，但是有时候对于 `maven` 的细节还是了解的不是很清楚，因此今天复习下。
 

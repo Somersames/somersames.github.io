@@ -1,8 +1,8 @@
 ---
 title: TreeSet和TreeMap的一点总结
 date: 2018-05-24 15:50:41
-tags: [java,数据结构]
-categories: Java
+tags: [Java,数据结构]
+categories: [Java,JDK]
 ---
 首先简单介绍下TreeSet和TreeMap的两种排序：
 * 自然排序

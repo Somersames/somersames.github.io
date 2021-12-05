@@ -2,7 +2,7 @@
 title: springboot多数据源-sqlSessionFactory
 date: 2020-03-19 19:57:04
 tags: [SpringBoot]
-categories: SpringBoot
+categories: [Java,SpringBoot]
 ---
 在SpringBoot中，动态的切换数据源的方式有两种，一种是通过`AbstractRoutingDataSource`来通过注解实现，另一种则是通过配置不同的`SqlSessionFactory`来读取不同文件夹的mapper，从而实现多数据源。
 代码如下：

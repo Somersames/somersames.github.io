@@ -1,8 +1,8 @@
 ---
 title: 记一次使用Spring5构件Web的过程
 date: 2018-03-20 18:06:50
-tags: Spring
-categories: Java
+tags: [Java]
+categories: [Java,Spring]
 ---
 由于当时在学习Spring的时候还是在一年前，那时候Spring才是刚到4.3还是4.5.然后做了一个项目之后便了解到了SpringBoot，于是一直在用SpringBoot，所以导致现在配置起来就有点忘记了。所以现在记录下此次配置的过程中所遇到的坑。
 

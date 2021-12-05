@@ -1,8 +1,8 @@
 ---
-title: Leetcode上两道比较好的BFS和DFS题目
+title: leetcode上两道比较好的BFS和DFS题目
 date: 2018-06-14 23:38:47
-tags: [算法,Leetcode]
-categories: Leetcode
+tags: [算法,leetcode]
+categories: [算法,leetcode]
 ---
 首先是Leetcode上两道比较好的一个题目，分别如下：
 * `https://leetcode.com/problems/letter-case-permutation/description/` Letter Case Permutation

@@ -2,7 +2,7 @@
 title: 记一次parallelStream错误使用导致的NullPointerException
 date: 2020-05-11 00:21:13
 tags: [Java]
-categories: Java
+categories: [Java,Lambda]
 ---
 
 ## parallelStream

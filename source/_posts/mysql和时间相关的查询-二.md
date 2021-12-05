@@ -1,8 +1,8 @@
 ---
-title: mysql和时间相关的查询(二)
+title: MySql和时间相关的查询(二)
 date: 2018-03-28 00:06:05
-tags: mysql时间相关
-categories: 数据库
+tags: [MySql]
+categories: [数据库,MySql]
 ---
 
 ## DATE_ADD():

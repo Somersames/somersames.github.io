@@ -1,8 +1,8 @@
 ---
 title: layui使用总结
 date: 2018-03-22 18:24:47
-tags: UI
-categories: 前端
+tags: [web前端]
+categories: [web前端,layui]
 ---
 
 ## 前言

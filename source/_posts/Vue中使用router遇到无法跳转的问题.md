@@ -1,8 +1,8 @@
 ---
 title: Vue中使用router遇到无法跳转的问题
 date: 2018-10-31 00:14:20
-tags: [前端,Vue]
-categories: Vue
+tags: [web前端,Vue]
+categories: [web前端,Vue]
 ---
 
 今天在配置Vue的路由的时候，在router的`index.js`中配置了如下代码：

@@ -1,8 +1,8 @@
 ---
 title: 在Mybatis中使用association进行一对一查询
 date: 2018-03-31 10:33:44
-tags: [web后端,mybatis]
-categories: Java
+tags: [web后端,MyBatis]
+categories: [第三方组件,MyBatis]
 ---
 在今天主要是测试了下在mybatis中使用两种方式来进行一对一查询。在mybatis中进行普通查询的话肯定是一个JavaBean对应一个Sql语句，但是当需要进行两表或者多表之间一对一的查询的时候就需要使用mybatis中的`association`进行一对一查询，而`association`的设置一般有两种方式：
 

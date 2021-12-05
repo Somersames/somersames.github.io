@@ -2,7 +2,7 @@
 title: SpringBoot2.x是怎样只初始化LettuceConnectionFactory的呢
 date: 2020-01-05 15:22:19
 tags: [SpringBoot]
-categories: SpringBoot
+categories: [Java,SpringBoot]
 ---
 ## SpringBoot1.5使用Redis和2.x的区别
 在 SpringBoot1.5 的版本的时候，如果要创建一个 RedisTemplate 的话，那么可以直接使用如下代码:

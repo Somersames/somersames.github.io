@@ -2,7 +2,7 @@
 title: Redis实现的分布式锁是完美的吗？
 date: 2020-08-03 00:34:23
 tags: [Redis]
-categories: Redis
+categories: [数据库,Redis]
 ---
 # 单实例
 

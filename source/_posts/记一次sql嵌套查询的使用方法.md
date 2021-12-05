@@ -1,8 +1,8 @@
 ---
 title: 记一次sql嵌套查询的使用方法
 date: 2018-03-16 20:57:29
-tags: mysql嵌套查询
-categories: 数据库
+tags: [MySql]
+categories: [数据库,MySql]
 ---
 
 # 记一次sql嵌套查询的使用方法

@@ -1,7 +1,8 @@
 ---
 title: 重温Java中String
 date: 2020-04-06 21:41:39
-tags:
+tags: [Java]
+categories: [Java,JDK]
 ---
 本文的内容都是基于 JDK1.8 来写的，主要是复习下 String 类的设计。
 ## 简介

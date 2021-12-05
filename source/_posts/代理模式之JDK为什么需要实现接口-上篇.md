@@ -1,8 +1,8 @@
 ---
 title: 代理模式之JDK为什么需要实现接口(上篇)
 date: 2020-04-15 22:58:59
-tags: 动态代理
-categories: Java
+tags: [Java]
+categories: [Java]
 ---
 ## 简介
 首先代理模式分为静态代理和动态代理，由于JDK采用的是动态代理，所以静态代理在这里不再介绍。

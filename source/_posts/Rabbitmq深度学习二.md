@@ -1,8 +1,8 @@
 ---
 title: Rabbitmq深度学习二
 date: 2018-11-10 00:22:34
-tags: [rabbitmq]
-categories: Rabbitmq
+tags: [Rabbitmq]
+categories: [消息队列,Rabbitmq]
 ---
 ## 消息的接收和拒绝
 当消费段接收到一个消息之后，会进行消费的处理。假如在业务中发现该消息是一个错误的消息，那么很显然业务方会直接拒绝此条消息。

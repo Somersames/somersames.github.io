@@ -2,7 +2,7 @@
 title: vue里面冒号和非冒号区别
 date: 2019-06-27 00:07:16
 tags: [Vue]
-categories: Vue
+categories: [web前端,Vue]
 ---
 ## vue里面冒号和非冒号的却别
 

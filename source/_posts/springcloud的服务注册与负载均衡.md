@@ -1,8 +1,8 @@
 ---
 title: springcloud的服务注册与负载均衡
 date: 2018-04-20 23:33:00
-tags: [web后端,springcloud]
-categories: Spring Cloud
+tags: [web后端,SpringCloud]
+categories: [Java,SpringCloud]
 ---
 在springcloud中，服务注册和负载均衡分别是eureka和ribbon。其中eureka是一个服务注册组件，ribbon则是一个负载均衡组件。如果开启了hystrix之后ribbon就默认已经开启了。
 

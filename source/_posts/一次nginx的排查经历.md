@@ -2,7 +2,7 @@
 title: 一次nginx的排查经历
 date: 2018-12-21 00:18:06
 tags: [nginx]
-categories: nginx
+categories: [第三方组件,nginx]
 ---
 
 ## 现象

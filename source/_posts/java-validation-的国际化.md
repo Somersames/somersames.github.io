@@ -1,7 +1,7 @@
 ---
 title: java validation 的国际化
 date: 2019-12-09 22:56:38
-tags:
+tags: [Spring]
 ---
 # 背景
 

@@ -1,7 +1,7 @@
 ---
 title: Java8中的流式简单总结
 date: 2019-11-22 00:03:01
-tags: Java
+tags: [Java]
 categories: Java
 ---
 在大量使用Java8中的流式操作之后，觉得用起来还挺舒服的，所以正好趁这个机会总结下。

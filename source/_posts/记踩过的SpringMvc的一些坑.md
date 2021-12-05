@@ -2,7 +2,7 @@
 title: 记踩过的SpringMvc的一些坑
 date: 2018-03-22 00:12:45
 tags: [spring,web后端]
-categories: Java
+categories: [Java,Spring]
 ---
 时隔一年多，再次在新公司期间接触了SpringMvc，由于之前一段时间再用Python和SpringBoot做项目，所以一时间导致SpringMvc配置中出现了好多坑，遂逐一记录：
 

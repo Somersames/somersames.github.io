@@ -1,7 +1,7 @@
 ---
 title: pandas的操作使用
 date: 2017-12-03 18:06:32
-tags: pandas
+tags: [pandas]
 categories: Python
 ---
 #  pandas读取csv文件

@@ -1,8 +1,8 @@
 ---
 title: springcloud使用feign导致的Excepted authority 错误(三)
 date: 2018-04-21 13:51:16
-tags: [web后端,springcloud]
-categories: Java
+tags: [web后端,Spring]
+categories: [Java,Spring]
 ---
 
 今天在用Feign的时候遇到了一个BUG，这个BUG虽然不是很难，但是由于网上没什么解决办法，而是自己的DEBUG解决的，所以暂且记录下：

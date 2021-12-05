@@ -1,8 +1,8 @@
 ---
-title: Mysql之binlog的使用(一)
+title: MySql之binlog的使用(一)
 date: 2018-11-11 22:37:55
-tags: [mysql]
-categories: mysql
+tags: [MySql]
+categories: [数据库,MySql]
 ---
 ## 背景
 

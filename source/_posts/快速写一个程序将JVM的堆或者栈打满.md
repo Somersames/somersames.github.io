@@ -2,7 +2,7 @@
 title: 快速写一个程序将JVM的堆或者栈打满
 date: 2020-07-11 16:03:11
 tags: [JVM]
-categories: JVM
+categories: [Java,JVM]
 ---
 
 # 堆和栈

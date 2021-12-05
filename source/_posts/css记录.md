@@ -1,8 +1,8 @@
 ---
 title: css记录
 date: 2018-03-30 08:54:39
-tags: css
-categories: 前端
+tags: [css]
+categories: [web前端,css]
 ---
 在css的样式应用中，script是一个双标签，也就是说script是必须要通过标签闭合的也就是`<script></script>`,而不可以使用`<script XXX/>`这样写的话会导致浏览器解析不出来页面，
 而单标签的话则是可以通过`/>`关闭。类似于`<meta>`标签的话则是不需要`/>`但是在工作中的话是推荐加上闭合标签，以是的代码有很好的可读性。

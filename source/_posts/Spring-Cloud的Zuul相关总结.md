@@ -2,7 +2,7 @@
 title: Spring Cloud的Zuul相关总结
 date: 2018-05-23 18:00:14
 tags: [SpringCloud,web后端]
-categories: Spring
+categories: [Java,SpringCloud]
 ---
 Zuul是SpringCloud生态体系中的网关一环，首先简单配置如下：
 开启注册中心并且配置yml文件，如下：

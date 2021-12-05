@@ -2,7 +2,7 @@
 title: 使用Mq实现延时队列
 date: 2019-03-04 00:30:53
 tags: [Rabbitmq]
-categories: Rabbitmq
+categories: [消息队列,Rabbitmq]
 ---
 在实际的应用开发中，下游系统并不需要立即处理上游系统的mq，但是又不可能将消息阻塞在上有系统中。且这两个系统之间又没有接口提供出来。这个时候就需要通过Mq的死信队列来实现一个延时效果
 

@@ -1,7 +1,8 @@
 ---
 title: ElementUI使用rules遇到的一些问题
 date: 2019-05-30 00:07:43
-tags:
+tags: [Vue]
+categories: [web前端,Vue]
 ---
 这些天一直在踩`Vue`的坑...今天遇到的一个问题是在一个父组件中，将某些数据通过`props`传递给子组件，同时在子组件里面也有相应的一些`rules`规则，但是在实际的开发中，却发现子组件的`rules`并未生效...反而一直提示对应的 message，后来才发现是跟 ElementUI 的`prop`有关。
 

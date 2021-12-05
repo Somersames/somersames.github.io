@@ -1,8 +1,8 @@
 ---
 title: Spring中AOP的探索与实践(二)之Mongo多数据源切换
 date: 2019-03-13 00:01:27
-tags: [Springboot,Mongo]
-categories: Springboot
+tags: [SpringBoot,Mongo]
+categories: [Java,SpringBoot]
 ---
 在之前的一片文章中介绍了使用AOP的方式来实现Redis的多数据源切换。而今天这一篇则是主要讲述`Mongo`的多数据源切换。
 

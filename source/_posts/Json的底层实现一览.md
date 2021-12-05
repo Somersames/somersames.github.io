@@ -2,7 +2,7 @@
 title: Json的底层实现一览
 date: 2018-09-06 23:44:26
 tags: [Json]
-categories: Json
+categories: [Java,Json]
 ---
 在开始了解Json的原理之前，首先看一段代码，在这里以阿里的`FastJson`为例。
 ```java

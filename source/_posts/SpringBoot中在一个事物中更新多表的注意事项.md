@@ -2,7 +2,7 @@
 title: SpringBoot中在一个事物中更新多表的注意事项
 date: 2019-01-02 00:13:56
 tags: [Springboot]
-categories: Springboot
+categories: [Java,SpringBoot]
 ---
 ## 现象：
 具体表现为数据被update之后，在同一个事物里面再次查询，查询的是一个更新之后的值。

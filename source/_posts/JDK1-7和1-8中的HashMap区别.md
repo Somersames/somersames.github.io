@@ -1,7 +1,7 @@
 ---
 title: JDK1.7和1.8中的HashMap区别
 date: 2019-04-08 22:47:15
-tags: Java集合
+tags: [Java]
 categories: Java
 ---
 Jdk1.7和1.8中，HashMap的一些关键点几乎重写了。

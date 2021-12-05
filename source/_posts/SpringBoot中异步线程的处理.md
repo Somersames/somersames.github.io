@@ -2,7 +2,7 @@
 title: SpringBoot中异步线程的处理
 date: 2020-04-02 23:46:30
 tags: [SpringBoot]
-categories: SpringBoot
+categories: [Java,SpringBoot]
 ---
 在工作或者学习的时候，我们都会接触到异步编程，大多数情况下都是通过新建一个线程池，然后调用`submit`方法或者`execute`方法来执行。如下：
 ```java

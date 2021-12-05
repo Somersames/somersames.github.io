@@ -1,8 +1,8 @@
 ---
 title: Rabbitmq深度学习一
 date: 2018-11-07 00:00:46
-tags: [rabbitmq]
-categories: Rabbitmq
+tags: [Rabbitmq]
+categories: [消息队列,Rabbitmq]
 ---
 ## rabbitmq 深度学习一
 ### 简介

@@ -1,8 +1,8 @@
 ---
 title: angular中使用Service
 date: 2018-05-30 22:52:12
-tags: [angular,web前端]
-categories: Angular
+tags: [Angular,web前端]
+categories: [web前端,Angular]
 ---
 今天使用 Angular 的时候，看到书中封装了自己得一个 LoggerService ，然后自己也想尝试下，顺便也写下这个记录。
 

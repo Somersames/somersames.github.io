@@ -2,7 +2,7 @@
 title: 线程的interrupt和stop区别，以及线程的中断机制
 date: 2018-05-22 10:53:34
 tags: [多线程]
-categories: Java
+categories: [Java,线程]
 ---
 ## interrupt
 在Java里面线程的中断是一个协作式的，也就是说线程会在自己合适的时候自己中断自己，一般来讲线程如果需要中断的话有如下两种方法：

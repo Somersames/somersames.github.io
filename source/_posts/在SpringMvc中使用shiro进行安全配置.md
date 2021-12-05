@@ -1,8 +1,8 @@
 ---
 title: 在SpringMvc中使用shiro进行安全配置
 date: 2018-03-23 19:58:04
-tags: shiro
-categories: Java
+tags: [Shiro]
+categories: [Java,Shiro]
 ---
 
 ## 前言

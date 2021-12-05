@@ -1,7 +1,8 @@
 ---
 title: 聊一聊 SpringBoot 中的一些被忽视的注解
 date: 2021-04-05 22:53:24
-tags:
+tags: [SpringBoot]
+categories: [Java,SpringBoot]
 ---
 
 之前在老的项目中看到了一个比较有趣的现象

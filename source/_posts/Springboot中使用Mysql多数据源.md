@@ -2,7 +2,7 @@
 title: Springboot中使用Mysql多数据源
 date: 2019-01-06 20:55:12
 tags: [Springboot]
-categories: Springboot
+categories: [Java,SpringBoot]
 ---
 随着业务的发展，很可能需要在一个项目里面同时使用多个数据源。
 

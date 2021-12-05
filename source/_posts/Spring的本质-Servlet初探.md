@@ -2,7 +2,7 @@
 title: Spring的本质-Servlet初探
 date: 2018-09-18 23:21:35
 tags: [Servlet]
-categories: Spring
+categories: [Java,Spring]
 ---
 
 现在Java的web开发体系中，Spring以其轻量级，低耦合而占据了老大的地位，但是Spring的本质是什么，为什么在Spring里面不需要像以前写Servlet项目一样，需要配置`web.xml`。这些都需要我们去刨根问底的。

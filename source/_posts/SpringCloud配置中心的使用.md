@@ -1,8 +1,8 @@
 ---
 title: SpringCloud配置中心的使用
 date: 2018-06-11 22:29:16
-tags: [springcloud,web后端]
-categories: Spring Cloud
+tags: [SpringCloud,web后端]
+categories: [Java,SpringCloud]
 ---
 
 在实际的开发过程中，很可能会涉及到很多的开发环境，常见的例如 dev , product 等，在使用SpringCloud的时候可以通过配置中心微服务，结合 Git 管理工具实现配置的集中式管理。

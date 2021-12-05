@@ -1,8 +1,8 @@
 ---
-title: Mysql中int类型的简单总结
+title: MySql中int类型的简单总结
 date: 2019-12-17 00:33:00
-tags: [Mysql]
-categories: Mysql
+tags: [MySql]
+categories: [数据库,MySql]
 ---
 ## 问题
 首先问两个问题：

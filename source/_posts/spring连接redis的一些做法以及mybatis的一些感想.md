@@ -1,8 +1,8 @@
 ---
 title: spring连接redis的一些做法以及mybatis的一些感想
 date: 2018-03-27 20:38:19
-tags: [spring,mybatis,redis]
-categories: Java
+tags: [spring,mybatis,Redis]
+categories: [Java,Spring]
 ---
 
 ## Redis启动

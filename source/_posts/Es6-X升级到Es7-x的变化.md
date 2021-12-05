@@ -2,7 +2,7 @@
 title: Es6.X升级到Es7.x的变化
 date: 2019-07-07 00:35:24
 tags: [ElasticSearch]
-categories: ElasticSearch
+categories: [ElasticSearch]
 ---
 ElasticSearch6.升级至ElasticSearch7.x的一些变化
 

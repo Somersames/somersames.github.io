@@ -1,8 +1,8 @@
 ---
-title: mysql的幻读(二)
+title: MySql的幻读(二)
 date: 2019-08-27 23:48:53
-tags: [Mysql]
-categories: Mysql
+tags: [MySql]
+categories: [数据库,MySql]
 ---
 
 ## 定义

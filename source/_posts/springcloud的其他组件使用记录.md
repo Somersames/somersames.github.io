@@ -1,8 +1,8 @@
 ---
 title: springcloud的其他组件使用记录之Config(四)
 date: 2018-04-22 23:40:20
-tags: [web后端,springcloud]
-categories: Spring
+tags: [web后端,SpringCloud]
+categories: [Java,SpringCloud]
 ---
 在使用Spring Config的时候遇到一些坑，在这里记录下，顺便梳理下这个使用。
 

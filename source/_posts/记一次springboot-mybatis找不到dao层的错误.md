@@ -1,8 +1,8 @@
 ---
 title: 记一次springboot-mybatis找不到dao层的错误
 date: 2018-03-05 20:23:02
-tags: springboot
-categories: Java
+tags: [mybatis]
+categories: [Java,Spring]
 ---
 写了三个多月的Python，今天再写一个springboot-mybatis的项目的时候好多东西都忘记了，尤其是在今天下午遇到了一个关于mybatis的错误：
 ```

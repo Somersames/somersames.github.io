@@ -2,7 +2,7 @@
 title: 在nginx中编写rewrite
 date: 2018-05-20 22:42:23
 tags: [web后端,nginx]
-categories: Nginx
+categories: [第三方组件,nginx]
 ---
 在使用Nginx做一个反向代理的时候难免会碰到一些特殊的URL，例如获取图片的URL是`http://dsda/XXX.jpg`，后来由于需要加一个时间戳来获取另外一张图片的话，此时的URL就为`http://dsda/XXX.jpg?time=YYYY`。
 当遇到这个情况的时候是有两种选择的，分别如下：

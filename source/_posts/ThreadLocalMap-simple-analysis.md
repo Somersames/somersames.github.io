@@ -1,8 +1,8 @@
 ---
 title: ThreadLocalMap 简单分析
 date: 2020-07-02 00:05:58
-tags: [java]
-categories: Java
+tags: [Java]
+categories: [Java,线程]
 ---
 
 ## ThreadLocal 

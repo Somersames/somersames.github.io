@@ -1,8 +1,8 @@
 ---
 title: Thread.sleep(0)-vs-Thread.yield()
 date: 2020-07-07 00:25:44
-tags: [java]
-categories: Java
+tags: [Java]
+categories: [Java,线程]
 ---
 ## 简介
 `Thread.sleep(long)` 和 `yield()` 都表示的是让出当前线程的 `CPU` 时间片，两者在执行的时候，都不会去释放自己已经持有的锁。

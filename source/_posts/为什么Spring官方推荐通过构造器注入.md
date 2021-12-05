@@ -2,7 +2,7 @@
 title: 为什么Spring官方推荐通过构造器注入
 date: 2019-07-22 00:16:15
 tags: [Spring]
-categories: Spring
+categories: [Java,Spring]
 ---
 ## 一
 

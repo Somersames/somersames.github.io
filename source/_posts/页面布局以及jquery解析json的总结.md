@@ -2,7 +2,7 @@
 title: 页面布局以及JS解析json的总结
 date: 2018-03-28 23:29:22
 tags: [web前端]
-categories: Java
+categories: [web前端,json]
 ---
 ## 关于页面的水平垂直居中：
 页面的水平垂直居中布局的话目前就我这里了解的话是又两种方法，一种是盒子布局，一种是流式布局：

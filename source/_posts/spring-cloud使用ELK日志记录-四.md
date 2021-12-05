@@ -1,8 +1,8 @@
 ---
-title: spring cloud使用ELK日志记录(四)
+title: Spring Cloud使用ELK日志记录(四)
 date: 2018-04-23 23:40:10
-tags: [spring,web后端]
-categories: Spring
+tags: [web后端,SpringCloud]
+categories: [Java,SpringCloud]
 ---
 在ELK的使用过程中，遇到了一点困难， 所以正好写这一篇文章来记录下：
 

@@ -2,7 +2,7 @@
 title: 一次SpringBoot初始化引起的思考
 date: 2018-09-25 23:03:38
 tags: [SpringBoot]
-categories: SpringBoot
+categories: [Java,SpringBoot]
 ---
 在Spring中，经常会使用`@Resource`注解来自动装配一些Bean，但是在初始化的时候还是有一点小坑的，下面是一段代码，有三个类，分别是A，B，C。
 

@@ -1,8 +1,8 @@
 ---
 title: 关于Java的链式代理
 date: 2018-03-20 18:06:50
-tags: 动态代理
-categories: Java
+tags: [Java]
+categories: [Java]
 ---
 
 # 关于Java的代理

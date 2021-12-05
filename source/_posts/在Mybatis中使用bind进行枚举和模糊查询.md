@@ -2,7 +2,7 @@
 title: 在Mybatis中使用bind进行枚举和模糊查询
 date: 2018-04-01 20:50:31
 tags: [mybatis,web后端]
-categories: Java
+categories: [第三方组件,MyBatis]
 ---
 首先在网上查询了下关于bind得用法，网上大多数都是bind和模糊查询绑定在一起，但是在这里的话其实bind和枚举一起结合起来使用会有很大的便利，比如一个班级的名称和班级的ID，需要根据班级的ID查询出班级的姓名的话，一般在mybatis中的sql语句是`select * from table where class_id =#{class_id}` 但是这样就有一个问题，假设学校现在系统升级，每一个班级的ID都变了，这时候需要到处修改mybatis的参数，将其修改成为正确的ID,那么这是一个浩大的工程，同时如果以后再需要改的话，会比较麻烦。处理这个问题，这个时候有如下方法：
 1. 枚举和`typehandle`组合解决问题；

@@ -1,7 +1,7 @@
 ---
 title: Java集合学习之HashSet
 date: 2019-04-04 23:30:28
-tags: Java集合
+tags: [Java]
 categories: Java
 ---
 ## 简介

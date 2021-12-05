@@ -2,7 +2,7 @@
 title: netty的一些概念
 date: 2018-05-31 15:10:19
 tags: [Java,Netty]
-categories: Netty
+categories: [第三方组件,Netty]
 ---
 
 这里面的部分概念参考了《Apress JavaI.O . NIO and NIO2》

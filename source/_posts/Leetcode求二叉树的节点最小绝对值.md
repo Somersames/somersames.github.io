@@ -1,8 +1,8 @@
 ---
-title: Leetcode求二叉树的节点最小绝对值
+title: leetcode求二叉树的节点最小绝对值
 date: 2018-07-25 23:36:59
-tags: [Leetcode,算法]
-categories: Leetcode
+tags: [leetcode,算法]
+categories: [算法,leetcode]
 ---
 
 # 二叉树的中序遍历

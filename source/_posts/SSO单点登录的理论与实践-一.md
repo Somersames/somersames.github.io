@@ -1,8 +1,8 @@
 ---
 title: SSO单点登录的理论与实践(一)
 date: 2019-01-13 23:04:56
-tags: [Springboot,SSO]
-categories: Springboot
+tags: [SpringBoot,SSO]
+categories: [Java,SpringBoot]
 ---
 
 # SSO简介

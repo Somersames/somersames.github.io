@@ -2,7 +2,7 @@
 title: 在Spring中使用JWT生成token来验证用户
 date: 2018-03-30 22:31:11
 tags: [Spring,Jwt]
-categories: Java
+categories: [Java,Spring]
 ---
 
 首先JWT全程是 JSON WEB TOKEN

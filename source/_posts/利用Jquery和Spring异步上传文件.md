@@ -2,7 +2,7 @@
 title: 利用Jquery和Spring异步上传文件
 date: 2018-03-29 11:28:04
 tags: [spring,jquery]
-categories: Java
+categories: [Java,Spring]
 ---
 ## 异步上传文件：
 用Jquery的异步上传文件的时候需要引入一个js文件`jquery.form.min.js`，用这个文件里面的$.ajaxSubmit()方法来实现一个异步的文件上传功能。

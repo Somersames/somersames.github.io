@@ -1,8 +1,8 @@
 ---
 title: mysql中count(*)和count(1)的区别
 date: 2020-06-05 00:01:47
-tags: [Mysql]
-categories: Mysql
+tags: [MySql]
+categories: [数据库,MySql]
 ---
 在进行旧的项目 review 的时候，我发现绝大多数的统计SQL都是基于 `count(1)` 来进行的，只有一少部分是基于 `count(*)`，那么这两种写法到底有什么区别。
 

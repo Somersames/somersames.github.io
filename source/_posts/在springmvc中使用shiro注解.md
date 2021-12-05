@@ -1,8 +1,8 @@
 ---
 title: 在springmvc中使用shiro注解
 date: 2018-03-26 15:14:11
-tags: shiro
-categories: Java
+tags: [Shiro]
+categories: [Java,Shiro]
 ---
 ## 前言：
 
