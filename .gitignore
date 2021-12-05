@@ -2,7 +2,7 @@
 Thumbs.db
 db.json
 *.log
-_config.icarus.yml
+*.yml
 node_modules/
 public/
 .deploy*/
